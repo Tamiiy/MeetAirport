@@ -15,6 +15,12 @@
 		CEE0D4FE1A5CD69D009FBBB5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEE0D4FD1A5CD69D009FBBB5 /* Images.xcassets */; };
 		CEE0D5011A5CD69D009FBBB5 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEE0D4FF1A5CD69D009FBBB5 /* LaunchScreen.xib */; };
 		CEE0D50D1A5CD69D009FBBB5 /* MeetAirportTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D50C1A5CD69D009FBBB5 /* MeetAirportTests.m */; };
+		CEE0D51B1A5CE021009FBBB5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE0D51A1A5CE021009FBBB5 /* MapKit.framework */; };
+		CEE0D53C1A5CE266009FBBB5 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE0D5371A5CE266009FBBB5 /* Bolts.framework */; };
+		CEE0D53D1A5CE266009FBBB5 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE0D5381A5CE266009FBBB5 /* Parse.framework */; };
+		CEE0D53E1A5CE266009FBBB5 /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE0D5391A5CE266009FBBB5 /* ParseCrashReporting.framework */; };
+		CEE0D53F1A5CE266009FBBB5 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE0D53A1A5CE266009FBBB5 /* ParseFacebookUtils.framework */; };
+		CEE0D5401A5CE266009FBBB5 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE0D53B1A5CE266009FBBB5 /* ParseUI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +48,12 @@
 		CEE0D5061A5CD69D009FBBB5 /* MeetAirportTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MeetAirportTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEE0D50B1A5CD69D009FBBB5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEE0D50C1A5CD69D009FBBB5 /* MeetAirportTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeetAirportTests.m; sourceTree = "<group>"; };
+		CEE0D51A1A5CE021009FBBB5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		CEE0D5371A5CE266009FBBB5 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		CEE0D5381A5CE266009FBBB5 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		CEE0D5391A5CE266009FBBB5 /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseCrashReporting.framework; sourceTree = "<group>"; };
+		CEE0D53A1A5CE266009FBBB5 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
+		CEE0D53B1A5CE266009FBBB5 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +61,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEE0D5401A5CE266009FBBB5 /* ParseUI.framework in Frameworks */,
+				CEE0D51B1A5CE021009FBBB5 /* MapKit.framework in Frameworks */,
+				CEE0D53D1A5CE266009FBBB5 /* Parse.framework in Frameworks */,
+				CEE0D53C1A5CE266009FBBB5 /* Bolts.framework in Frameworks */,
+				CEE0D53F1A5CE266009FBBB5 /* ParseFacebookUtils.framework in Frameworks */,
+				CEE0D53E1A5CE266009FBBB5 /* ParseCrashReporting.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +86,7 @@
 				CEE0D4EC1A5CD69D009FBBB5 /* MeetAirport */,
 				CEE0D5091A5CD69D009FBBB5 /* MeetAirportTests */,
 				CEE0D4EB1A5CD69D009FBBB5 /* Products */,
+				CEE0D5411A5CE295009FBBB5 /* frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -120,6 +139,19 @@
 				CEE0D50B1A5CD69D009FBBB5 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CEE0D5411A5CE295009FBBB5 /* frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CEE0D5371A5CE266009FBBB5 /* Bolts.framework */,
+				CEE0D5381A5CE266009FBBB5 /* Parse.framework */,
+				CEE0D5391A5CE266009FBBB5 /* ParseCrashReporting.framework */,
+				CEE0D53A1A5CE266009FBBB5 /* ParseFacebookUtils.framework */,
+				CEE0D53B1A5CE266009FBBB5 /* ParseUI.framework */,
+				CEE0D51A1A5CE021009FBBB5 /* MapKit.framework */,
+			);
+			name = frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -347,6 +379,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/parse-library-1.6.1",
+					2,
+					"/Users/user/Desktop/parse-library-1.6.1",
+					3,
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = MeetAirport/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -357,6 +397,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/parse-library-1.6.1",
+					2,
+					"/Users/user/Desktop/parse-library-1.6.1",
+					3,
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = MeetAirport/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
