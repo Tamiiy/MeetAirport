@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		B62DAB2172A87F824A7AA7C7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6839C4AC2D891AAEBCFB2940 /* libPods.a */; };
+		CE9083901A635DBE00E6FC33 /* PostTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE90838F1A635DBE00E6FC33 /* PostTableViewController.m */; };
+		CE9083921A64AE8100E6FC33 /* スクリーンショット 2015-01-11 19.51.10.png in Resources */ = {isa = PBXBuildFile; fileRef = CE9083911A64AE8100E6FC33 /* スクリーンショット 2015-01-11 19.51.10.png */; };
 		CEE0D4F01A5CD69D009FBBB5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D4EF1A5CD69D009FBBB5 /* main.m */; };
 		CEE0D4F31A5CD69D009FBBB5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D4F21A5CD69D009FBBB5 /* AppDelegate.m */; };
 		CEE0D4F61A5CD69D009FBBB5 /* MeetAirport.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D4F41A5CD69D009FBBB5 /* MeetAirport.xcdatamodeld */; };
@@ -17,6 +19,7 @@
 		CEE0D5011A5CD69D009FBBB5 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEE0D4FF1A5CD69D009FBBB5 /* LaunchScreen.xib */; };
 		CEE0D50D1A5CD69D009FBBB5 /* MeetAirportTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D50C1A5CD69D009FBBB5 /* MeetAirportTests.m */; };
 		CEE0D55A1A5F643C009FBBB5 /* AirportTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D5591A5F643C009FBBB5 /* AirportTableViewController.m */; };
+		CEE0D55D1A62B0E8009FBBB5 /* PostTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D55C1A62B0E8009FBBB5 /* PostTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +36,9 @@
 		0A290A0C36D186C4D7924E51 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		6839C4AC2D891AAEBCFB2940 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB93C2753D283EF30626EAF0 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		CE90838E1A635DBE00E6FC33 /* PostTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostTableViewController.h; sourceTree = "<group>"; };
+		CE90838F1A635DBE00E6FC33 /* PostTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostTableViewController.m; sourceTree = "<group>"; };
+		CE9083911A64AE8100E6FC33 /* スクリーンショット 2015-01-11 19.51.10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "スクリーンショット 2015-01-11 19.51.10.png"; path = "../../../../../Desktop/スクリーンショット 2015-01-11 19.51.10.png"; sourceTree = "<group>"; };
 		CEE0D4EA1A5CD69D009FBBB5 /* MeetAirport.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeetAirport.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEE0D4EE1A5CD69D009FBBB5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEE0D4EF1A5CD69D009FBBB5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -49,6 +55,8 @@
 		CEE0D50C1A5CD69D009FBBB5 /* MeetAirportTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeetAirportTests.m; sourceTree = "<group>"; };
 		CEE0D5581A5F643C009FBBB5 /* AirportTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirportTableViewController.h; sourceTree = "<group>"; };
 		CEE0D5591A5F643C009FBBB5 /* AirportTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AirportTableViewController.m; sourceTree = "<group>"; };
+		CEE0D55B1A62B0E8009FBBB5 /* PostTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostTableViewCell.h; sourceTree = "<group>"; };
+		CEE0D55C1A62B0E8009FBBB5 /* PostTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +125,10 @@
 				CEE0D4FA1A5CD69D009FBBB5 /* Main.storyboard */,
 				CEE0D5581A5F643C009FBBB5 /* AirportTableViewController.h */,
 				CEE0D5591A5F643C009FBBB5 /* AirportTableViewController.m */,
+				CE90838E1A635DBE00E6FC33 /* PostTableViewController.h */,
+				CE90838F1A635DBE00E6FC33 /* PostTableViewController.m */,
+				CEE0D55B1A62B0E8009FBBB5 /* PostTableViewCell.h */,
+				CEE0D55C1A62B0E8009FBBB5 /* PostTableViewCell.m */,
 				CEE0D4FD1A5CD69D009FBBB5 /* Images.xcassets */,
 				CEE0D4FF1A5CD69D009FBBB5 /* LaunchScreen.xib */,
 				CEE0D4F41A5CD69D009FBBB5 /* MeetAirport.xcdatamodeld */,
@@ -128,6 +140,7 @@
 		CEE0D4ED1A5CD69D009FBBB5 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				CE9083911A64AE8100E6FC33 /* スクリーンショット 2015-01-11 19.51.10.png */,
 				CEE0D4EE1A5CD69D009FBBB5 /* Info.plist */,
 				CEE0D4EF1A5CD69D009FBBB5 /* main.m */,
 			);
@@ -233,6 +246,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE9083921A64AE8100E6FC33 /* スクリーンショット 2015-01-11 19.51.10.png in Resources */,
 				CEE0D4FC1A5CD69D009FBBB5 /* Main.storyboard in Resources */,
 				CEE0D5011A5CD69D009FBBB5 /* LaunchScreen.xib in Resources */,
 				CEE0D4FE1A5CD69D009FBBB5 /* Images.xcassets in Resources */,
@@ -287,6 +301,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEE0D55A1A5F643C009FBBB5 /* AirportTableViewController.m in Sources */,
+				CE9083901A635DBE00E6FC33 /* PostTableViewController.m in Sources */,
+				CEE0D55D1A62B0E8009FBBB5 /* PostTableViewCell.m in Sources */,
 				CEE0D4F31A5CD69D009FBBB5 /* AppDelegate.m in Sources */,
 				CEE0D4F01A5CD69D009FBBB5 /* main.m in Sources */,
 				CEE0D4F91A5CD69D009FBBB5 /* ViewController.m in Sources */,
