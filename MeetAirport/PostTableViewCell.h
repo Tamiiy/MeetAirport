@@ -19,5 +19,6 @@
 @property (weak, nonatomic) IBOutlet PFImageView *userImg;
 
 - (void)setDataIndexPath:(NSIndexPath *)indexPath;
+- (void)setDataOfParse:(NSDictionary *)dataOfParse;
 
 @end

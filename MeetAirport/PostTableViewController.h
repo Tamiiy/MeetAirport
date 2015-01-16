@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
+#import "PFQueryTableViewController.h"
 
-@interface PostTableViewController : UITableViewController
+@interface PostTableViewController : PFQueryTableViewController
 
 @end

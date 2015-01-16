@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -245,17 +246,17 @@
                                             <exclude reference="nu6-Xt-0MC"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <exclude reference="8po-wP-3ku"/>
-                                            <exclude reference="emQ-Ms-soz"/>
-                                            <exclude reference="mYK-eJ-UXY"/>
-                                            <exclude reference="yME-3H-yea"/>
                                             <exclude reference="irP-aq-dmC"/>
                                             <exclude reference="j2y-B6-JLc"/>
+                                            <exclude reference="mYK-eJ-UXY"/>
+                                            <exclude reference="yME-3H-yea"/>
+                                            <exclude reference="VzE-le-kyy"/>
+                                            <exclude reference="z03-YP-Cg6"/>
+                                            <exclude reference="8po-wP-3ku"/>
+                                            <exclude reference="emQ-Ms-soz"/>
                                             <exclude reference="oyk-iP-h7K"/>
                                             <exclude reference="ynw-1c-aFA"/>
                                             <exclude reference="ypE-wv-DXt"/>
-                                            <exclude reference="VzE-le-kyy"/>
-                                            <exclude reference="z03-YP-Cg6"/>
                                         </mask>
                                     </variation>
                                     <variation key="widthClass=compact">
@@ -267,17 +268,17 @@
                                             <include reference="nu6-Xt-0MC"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <include reference="8po-wP-3ku"/>
-                                            <include reference="emQ-Ms-soz"/>
-                                            <include reference="mYK-eJ-UXY"/>
-                                            <include reference="yME-3H-yea"/>
                                             <include reference="irP-aq-dmC"/>
                                             <include reference="j2y-B6-JLc"/>
+                                            <include reference="mYK-eJ-UXY"/>
+                                            <include reference="yME-3H-yea"/>
+                                            <include reference="VzE-le-kyy"/>
+                                            <include reference="z03-YP-Cg6"/>
+                                            <include reference="8po-wP-3ku"/>
+                                            <include reference="emQ-Ms-soz"/>
                                             <include reference="oyk-iP-h7K"/>
                                             <include reference="ynw-1c-aFA"/>
                                             <include reference="ypE-wv-DXt"/>
-                                            <include reference="VzE-le-kyy"/>
-                                            <include reference="z03-YP-Cg6"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>

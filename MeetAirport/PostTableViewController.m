@@ -10,14 +10,59 @@
 #import "PostTableViewCell.h"
 
 @interface PostTableViewController ()
-
+@property (nonatomic, retain) NSMutableDictionary *sections;
+@property (nonatomic, retain) NSMutableDictionary *sectionToSportTypeMap;
+@property (nonatomic, retain) NSArray *dataOfParse;
+;
 @end
 
 @implementation PostTableViewController
 
+@synthesize sections = _sections;
+@synthesize sectionToSportTypeMap = _sectionToSportTypeMap;
+
+- (id)initWithCoder:(NSCoder*)decoder {
+    self = [super initWithCoder:decoder];
+    if (self) {
+        self.parseClassName = @"Post";
+        self.pullToRefreshEnabled = YES;
+        self.paginationEnabled = NO;
+        self.objectsPerPage = 25;
+    }
+    return self;
+}
+
+/* 検証用
+- (void)objectsWillLoad {
+    NSLog(@"hogehoge");
+}
+
+- (void)objectsDidLoad:(NSError *)error {
+    NSLog(@"fugafuga");
+}
+*/
+
+//データは手動でとってきているが、queryを返さないと落ちる
+- (PFQuery *)queryForTable {
+    PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
+
+    //なぜか落ちる
+//    if (self.pullToRefreshEnabled) {
+//        query.cachePolicy = kPFCachePolicyNetworkOnly;
+//    }
+//    if (self.objects.count == 0) {
+//        query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+//    }
+    
+    [query orderByDescending:@"createdAt"];
+    return query;
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
+    self.dataOfParse = query.findObjects;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -34,18 +79,22 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 2;
+    NSInteger count = [self.dataOfParse count];
+    return count;
 }
 
-
+//- (PFObject *)objectAtIndexPath:(NSIndexPath *)indexPath {
+//    NSNumber *rowIndex = [rowIndecesInSection objectAtIndex:indexPath.row];
+//    return [self.objects objectAtIndex:[rowIndex intValue]];
+//}
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PostTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"postCell" forIndexPath:indexPath];
+    NSInteger row = indexPath.row;
     
-    //tableViewCell01のsetDataメソッドにindexPathを引数として渡して呼び出す
-    [cell setDataIndexPath:indexPath];
-    
+    //PostTableViewCellのsetDataOfParseメソッドに、データを1セルずつ引数として渡して呼び出す
+    [cell setDataOfParse:self.dataOfParse[row]];
     return cell;
 }
 

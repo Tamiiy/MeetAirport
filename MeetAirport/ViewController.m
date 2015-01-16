@@ -28,10 +28,10 @@
 //    [testObject saveInBackground];
 
     // DB読み込みテスト - SUCCESS!
-    PFQuery *query = [PFQuery queryWithClassName:@"Post"];
-    [query getObjectInBackgroundWithId:@"Oj6tj81LrS" block:^(PFObject *object, NSError *error) {
-        _testLabel.text = object[@"Name"];
-    }];
+//    PFQuery *query = [PFQuery queryWithClassName:@"Post"];
+//    [query getObjectInBackgroundWithId:@"Oj6tj81LrS" block:^(PFObject *object, NSError *error) {
+//        _testLabel.text = object[@"Name"];
+//    }];
     
     //空港一覧取得のAPIテスト - SUCCESS!
 //    NSURL *url = [NSURL URLWithString:@"https://gist.githubusercontent.com/tdreyno/4278655/raw/755b1cfc5ded72d7b45f97b9c7295d525be18780/airports.json"];

@@ -119,7 +119,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
     [self loadObjects];
 }
 
@@ -192,6 +191,8 @@
     PFQuery *query = [self queryForTable];
     [self _alterQuery:query forLoadingPage:page];
     [query findObjectsInBackgroundWithBlock:^(NSArray *foundObjects, NSError *error) {
+        NSLog(@"%@",foundObjects);
+        
         if (query.cachePolicy != kPFCachePolicyCacheOnly && error.code == kPFErrorCacheMiss) {
             // no-op on cache miss
             return;
