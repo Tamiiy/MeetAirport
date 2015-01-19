@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B62DAB2172A87F824A7AA7C7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6839C4AC2D891AAEBCFB2940 /* libPods.a */; };
+		CE725D311A6CA4AB00BA2389 /* AddPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE725D301A6CA4AB00BA2389 /* AddPostViewController.m */; };
 		CE9083901A635DBE00E6FC33 /* PostTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE90838F1A635DBE00E6FC33 /* PostTableViewController.m */; };
 		CE9083921A64AE8100E6FC33 /* スクリーンショット 2015-01-11 19.51.10.png in Resources */ = {isa = PBXBuildFile; fileRef = CE9083911A64AE8100E6FC33 /* スクリーンショット 2015-01-11 19.51.10.png */; };
 		CEE0D4F01A5CD69D009FBBB5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D4EF1A5CD69D009FBBB5 /* main.m */; };
@@ -36,6 +37,8 @@
 		0A290A0C36D186C4D7924E51 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		6839C4AC2D891AAEBCFB2940 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB93C2753D283EF30626EAF0 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		CE725D2F1A6CA4AB00BA2389 /* AddPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddPostViewController.h; sourceTree = "<group>"; };
+		CE725D301A6CA4AB00BA2389 /* AddPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddPostViewController.m; sourceTree = "<group>"; };
 		CE90838E1A635DBE00E6FC33 /* PostTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostTableViewController.h; sourceTree = "<group>"; };
 		CE90838F1A635DBE00E6FC33 /* PostTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostTableViewController.m; sourceTree = "<group>"; };
 		CE9083911A64AE8100E6FC33 /* スクリーンショット 2015-01-11 19.51.10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "スクリーンショット 2015-01-11 19.51.10.png"; path = "../../../../../Desktop/スクリーンショット 2015-01-11 19.51.10.png"; sourceTree = "<group>"; };
@@ -118,17 +121,19 @@
 		CEE0D4EC1A5CD69D009FBBB5 /* MeetAirport */ = {
 			isa = PBXGroup;
 			children = (
+				CEE0D4FA1A5CD69D009FBBB5 /* Main.storyboard */,
 				CEE0D4F11A5CD69D009FBBB5 /* AppDelegate.h */,
 				CEE0D4F21A5CD69D009FBBB5 /* AppDelegate.m */,
 				CEE0D4F71A5CD69D009FBBB5 /* ViewController.h */,
 				CEE0D4F81A5CD69D009FBBB5 /* ViewController.m */,
-				CEE0D4FA1A5CD69D009FBBB5 /* Main.storyboard */,
 				CEE0D5581A5F643C009FBBB5 /* AirportTableViewController.h */,
 				CEE0D5591A5F643C009FBBB5 /* AirportTableViewController.m */,
 				CE90838E1A635DBE00E6FC33 /* PostTableViewController.h */,
 				CE90838F1A635DBE00E6FC33 /* PostTableViewController.m */,
 				CEE0D55B1A62B0E8009FBBB5 /* PostTableViewCell.h */,
 				CEE0D55C1A62B0E8009FBBB5 /* PostTableViewCell.m */,
+				CE725D2F1A6CA4AB00BA2389 /* AddPostViewController.h */,
+				CE725D301A6CA4AB00BA2389 /* AddPostViewController.m */,
 				CEE0D4FD1A5CD69D009FBBB5 /* Images.xcassets */,
 				CEE0D4FF1A5CD69D009FBBB5 /* LaunchScreen.xib */,
 				CEE0D4F41A5CD69D009FBBB5 /* MeetAirport.xcdatamodeld */,
@@ -300,6 +305,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE725D311A6CA4AB00BA2389 /* AddPostViewController.m in Sources */,
 				CEE0D55A1A5F643C009FBBB5 /* AirportTableViewController.m in Sources */,
 				CE9083901A635DBE00E6FC33 /* PostTableViewController.m in Sources */,
 				CEE0D55D1A62B0E8009FBBB5 /* PostTableViewCell.m in Sources */,

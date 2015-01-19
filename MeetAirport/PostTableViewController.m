@@ -42,7 +42,7 @@
 }
 */
 
-//データは手動でとってきているが、queryを返さないと落ちる
+//PFQueryTableViewControllerの仕組み上、queryを返さないと落ちるみたい
 - (PFQuery *)queryForTable {
     PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
 
@@ -97,8 +97,6 @@
     [cell setDataOfParse:self.dataOfParse[row]];
     return cell;
 }
-
-
 
 /*
 // Override to support conditional editing of the table view.
