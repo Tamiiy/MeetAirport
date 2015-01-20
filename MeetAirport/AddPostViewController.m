@@ -18,12 +18,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    //国籍が選択されたら、ラベルに入れ直す
+    if (self.selectedNationality != nil) {
+        self.outputNationality.text = self.selectedNationality;
+    }
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 /*
 #pragma mark - Navigation
@@ -40,4 +47,6 @@
     insertObject[@"Name"] = self.inputName.text;
     [insertObject saveInBackground];
 }
+
+
 @end

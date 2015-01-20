@@ -21,4 +21,5 @@
 - (void)setDataIndexPath:(NSIndexPath *)indexPath;
 - (void)setDataOfParse:(NSDictionary *)dataOfParse;
 
+
 @end

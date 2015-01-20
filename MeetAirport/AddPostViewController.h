@@ -12,7 +12,13 @@
 @property (weak, nonatomic) IBOutlet UITextField *inputName;
 
 @property (weak, nonatomic) IBOutlet UIButton *inputNationality;
+//- (void)setNationality:(NSString *)selectedNationality;
+@property (weak, nonatomic) NSString *selectedNationality;
 @property (weak, nonatomic) IBOutlet UILabel *outputNationality;
+
+
+@property (weak, nonatomic) IBOutlet UIImageView *userImage;
+- (IBAction)changePhoto:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UITextField *inputTitle;
 

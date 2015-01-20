@@ -1,32 +1,27 @@
 //
-//  AirportTableViewController.m
+//  SelectNationalityTableViewController.m
 //  MeetAirport
 //
-//  Created by YUKIKO on 2015/01/09.
+//  Created by YUKIKO on 2015/01/19.
 //  Copyright (c) 2015年 YukikoTamiya. All rights reserved.
 //
 
-#import "AirportTableViewController.h"
+#import "SelectNationalityTableViewController.h"
+#import "AddPostViewController.h"
 
-@interface AirportTableViewController ()
+@interface SelectNationalityTableViewController ()
 
-@property NSDictionary *airportList;
+@property NSArray *countries;
 
 @end
 
-
-
-@implementation AirportTableViewController
+@implementation SelectNationalityTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //Airport一覧のデータを取得して、辞書型airportListに代入
-    NSURL *url = [NSURL URLWithString:@"https://gist.githubusercontent.com/tdreyno/4278655/raw/755b1cfc5ded72d7b45f97b9c7295d525be18780/airports.json"];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    NSData *json_data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-    NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:json_data options:NSJSONReadingAllowFragments error:nil];
-    self.airportList = jsonObject;
+    // 国表示のテストのための配列
+    self.countries = [NSArray arrayWithObjects:@"Japan", @"Philippines", @"Korea", @"Thai", @"America", @"Brazil", nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -37,31 +32,45 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSInteger airportCount = self.airportList.count;
-    return airportCount;
+    // Return the number of rows in the section.
+    return 6;
 }
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"airportListCell"];
-    
-    // AirPort名と国名だけ取り出して一覧表示する
-    NSArray* names = (NSArray*)[_airportList valueForKey:@"name"];
-    NSArray* countries = (NSArray*)[_airportList valueForKey:@"country"];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ContriesCell" forIndexPath:indexPath];
 
+    // 国名を取り出して一覧表示する(のちにAPI処理)
+//    NSArray* names = (NSArray*)[_airportList valueForKey:@"name"];
+//    NSArray* countries = (NSArray*)[_airportList valueForKey:@"country"];
+    
     NSInteger row = indexPath.row;
+    cell.textLabel.text = self.countries[row];
     
-    NSString *nameData = names[row];
-    NSString *countryData = countries[row];
-    
-    cell.textLabel.text = nameData;
-    cell.detailTextLabel.text = countryData;
-
     return cell;
 }
+
+
+//-(void)tableView:(UITableView *)tv didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+//    NSInteger row = [[self.tableView indexPathForSelectedRow] row];
+//    
+//    AddPostViewController *postView = [self.storyboard instantiateViewControllerWithIdentifier:@"postView"];
+//    postView.selectedNationality = self.countries[row];
+//    NSLog(@"これが選択されたこくせき%@", postView.selectedNationality);
+//}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    NSInteger selectedRow = [self.tableView indexPathForSelectedRow].row;
+    AddPostViewController *postView = [segue destinationViewController];
+    postView.selectedNationality = self.countries[selectedRow];
+}
+
 
 /*
 // Override to support conditional editing of the table view.
