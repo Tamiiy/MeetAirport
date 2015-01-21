@@ -84,3 +84,9 @@
 #define COCOAPODS_VERSION_MINOR_ParseUI 0
 #define COCOAPODS_VERSION_PATCH_ParseUI 2
 
+// RMDateSelectionViewController
+#define COCOAPODS_POD_AVAILABLE_RMDateSelectionViewController
+#define COCOAPODS_VERSION_MAJOR_RMDateSelectionViewController 1
+#define COCOAPODS_VERSION_MINOR_RMDateSelectionViewController 4
+#define COCOAPODS_VERSION_PATCH_RMDateSelectionViewController 1
+

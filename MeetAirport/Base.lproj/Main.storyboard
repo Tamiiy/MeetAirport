@@ -279,6 +279,9 @@
                                 <variation key="widthClass=compact" misplaced="YES">
                                     <rect key="frame" x="29" y="309" width="22" height="22"/>
                                 </variation>
+                                <connections>
+                                    <action selector="actionDatePicker:" destination="3CP-Qo-f2W" eventType="touchUpInside" id="7Fj-d4-6U1"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ここにTimeが表示されるよ" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3gG-FA-pCD">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>

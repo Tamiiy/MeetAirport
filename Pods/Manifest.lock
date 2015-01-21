@@ -33,6 +33,7 @@ PODS:
   - ParseUI (1.0.2):
     - Parse (~> 1.5)
     - ParseFacebookUtils (~> 1.5)
+  - RMDateSelectionViewController (1.4.1)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
@@ -40,6 +41,7 @@ DEPENDENCIES:
   - ParseCrashReporting
   - ParseFacebookUtils
   - ParseUI
+  - RMDateSelectionViewController (~> 1.4.0)
 
 SPEC CHECKSUMS:
   AFNetworking: 0f54cb5d16ce38c1b76948faffb8d5fb705021c7
@@ -49,5 +51,6 @@ SPEC CHECKSUMS:
   ParseCrashReporting: 28fc412d554828f3e892e9e99817e3a9a348e751
   ParseFacebookUtils: 7659dcda0fa59f67234ab7ba5a82a9b05073c59a
   ParseUI: 0eed358b238dcd66949ebc22513eba603e110087
+  RMDateSelectionViewController: 225cd405425eea886cfc05b43237dbf557dbe626
 
-COCOAPODS: 0.36.0.beta.1
+COCOAPODS: 0.35.0

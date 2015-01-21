@@ -5,3 +5,4 @@ pod 'Parse'
 pod 'ParseCrashReporting'
 pod 'ParseFacebookUtils'
 pod 'ParseUI'
+pod "RMDateSelectionViewController", "~> 1.4.0"

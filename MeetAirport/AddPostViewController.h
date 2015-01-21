@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AddPostViewController : UIViewController
+@interface AddPostViewController : UIViewController <UIActionSheetDelegate> {
+    UIActionSheet *basicSheet;
+}
+
 @property (weak, nonatomic) IBOutlet UITextField *inputName;
 
 @property (weak, nonatomic) IBOutlet UIButton *inputNationality;
@@ -23,6 +26,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *inputTitle;
 
 @property (weak, nonatomic) IBOutlet UIButton *inputTime;
+- (IBAction)actionDatePicker:(id)sender;
 @property (weak, nonatomic) IBOutlet UILabel *outputTime;
 
 @property (weak, nonatomic) IBOutlet UITextView *inputContents;
