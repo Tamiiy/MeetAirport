@@ -7,9 +7,14 @@
 //
 
 #import "AddPostViewController.h"
+#import "PostTableViewController.h"
 #import <Parse/Parse.h>
 
-@interface AddPostViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface AddPostViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, RMDateSelectionViewControllerDelegate>
+
+@property NSDate *tmpDate;
+@property NSData *imgData;
+
 
 @end
 
@@ -25,29 +30,15 @@
     }
 }
 
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
-- (IBAction)insertPost:(id)sender {
-    PFObject *insertObject = [PFObject objectWithClassName:@"Post"];
-    insertObject[@"Name"] = self.inputName.text;
-    [insertObject saveInBackground];
-}
-
+/**
+ * 画像をカメラロールから取得してUIViewに表示
+ */
 
 //カメラロールの起動と画像選択処理
 - (IBAction)changePhoto:(id)sender {
@@ -60,87 +51,80 @@
         [self presentViewController:picker animated:YES completion:NULL];
     }
 }
-
 //画像選択後にUIimageViewに表示させる
 - (void)imagePickerController:(UIImagePickerController *)picker
 didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
     [self dismissViewControllerAnimated:YES completion:^{
+        // Parseに保存するため、Data型にコンバートして格納
+        self.imgData = UIImageJPEGRepresentation(image, 0.5f);
+        // 選択した画像を表示
         self.userImage.image = image;
     }];
 }
 
+
 /**
- * 時刻をActionSheet＋DatePickerで入力
+ * 時刻をActionSheet＋DatePickerで入力(RMていう素敵ライブラリ使用)
  */
+
 - (IBAction)actionDatePicker:(id)sender {
     NSLog(@"日付設定のボタンが押されたよ！");
-
-    /**
-     * UIActionViewを、何も入っていない状態で生成
-     */
-    basicSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:nil cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
-    //アクションシートのスタイルを黒に設定
-    [basicSheet setActionSheetStyle:UIActionSheetStyleBlackTranslucent];
-    
-    /**
-     * UIDatePickerの生成
-     */
-    //アクションシートの箱を基準として、上から(y座標)44の位置に表示させる
-    CGRect pickerFrame = CGRectMake(0, 44, 320, 520);
-    UIDatePicker *datePicker = [[UIDatePicker alloc] initWithFrame:pickerFrame];
-    //日時分どれを表示するか設定(ModeDateAndTime:日時・ModeTime:時間のみ)
-    [datePicker setDatePickerMode:UIDatePickerModeDateAndTime];
-    //5分刻みで選べるようにする
-    datePicker.minuteInterval = 5;
-    // 日付ピッカーの値が変更されたときに呼ばれるメソッドを設定
-//    [datePicker addTarget:self
-//                   action:@selector(datePicker_ValueChanged:)
-//         forControlEvents:UIControlEventValueChanged];
-    // UIDatePickerのインスタンスをアクションビューに追加
-    [basicSheet addSubview:datePicker];
-    
-    //アクションシートを表示
-    [basicSheet setBounds:CGRectMake(0, 0, 320, 520)];
-    [basicSheet showInView:self.view];
-    
-    
-    /**
-     * 決定・キャンセルボタンの作成
-     */
-    
-    
-    /**
-     * UIDatePickerの値を反映させる
-     */
-    //日付の表示形式を設定
-//    NSDateFormatter *inputDateFormatter = [[NSDateFormatter alloc] init];
-//    //ja_JPは24h表示、AM、PMの場合はen_US
-//    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
-//    [inputDateFormatter setLocale:locale];
-//    [inputDateFormatter setCalendar:[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar]];
-//    [inputDateFormatter setDateFormat:@"YY:H:mm"];
-////    NSString *inputDateStr = 
-////    NSDate *inputDate = [inputDateFormatter dateFromString:inputDateStr];
-//    [datePicker setLocale:locale];
-////    [datePicker setCalendar:[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-////    [datePicker setDate:inputDate];
-//    
-//     //UIDatePickerをUIActionSheetに組み込む
-//     [basicSheet addSubview:datePicker];
-//     
-//     //モーダルから抜け出すためのボタン生成
-//    UIToolbar *controlToolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, basicSheet.bounds.size.width, 44)];
-//    [controlToolBar setBarStyle:UIBarStyleBlack];
-//    [controlToolBar sizeToFit];
-    
-//    UIBarButtonItem *spacer
-    
+    RMDateSelectionViewController *dateSelectionVC = [RMDateSelectionViewController dateSelectionController];
+    dateSelectionVC.delegate = self;
+    [dateSelectionVC show];
+}
+//NSDate → NSString に変換する関数
++ (NSString*)dateToString:(NSDate *)baseDate formatString:(NSString *)formatString
+{
+    NSDateFormatter *inputDateFormatter = [[NSDateFormatter alloc] init];
+    //24時間表示 & iPhoneの現在の設定に合わせる
+    [inputDateFormatter setLocale:[NSLocale currentLocale]];
+    [inputDateFormatter setDateFormat:formatString];
+    NSString *str = [inputDateFormatter stringFromDate:baseDate];
+    return str;
+}
+//時刻設定完了時の処理
+- (void)dateSelectionViewController:(RMDateSelectionViewController *)vc didSelectDate:(NSDate *)aDate {
+    NSString *dateStr = [AddPostViewController dateToString:aDate formatString:@"yyyy-MM-dd HH:mm"];
+    self.tmpDate = aDate;
+    self.outputTime.text = dateStr;
+}
+//時刻設定キャンセル時の処理
+- (void)dateSelectionViewControllerDidCancel:(RMDateSelectionViewController *)vc {
+    //Do Nothing
 }
 
-- (void)datePicker_ValueChanged:(id)sender {
+
+/**
+ * 入力したデータをINSERTして、画面を閉じる
+ */
+
+- (IBAction)insertPost:(id)sender {
+    PFObject *insertObject = [PFObject objectWithClassName:@"Post"];
+    insertObject[@"Name"] = self.inputName.text;
+    insertObject[@"Title"] = self.inputTitle.text;
+    insertObject[@"Contents"] = self.inputContents.text;
+    insertObject[@"DepartureTime"] = self.tmpDate;
+    PFFile *imageFile = [PFFile fileWithName:@"Image.jpg" data:self.imgData];
+    insertObject[@"Image"] = imageFile;
+
+    [insertObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (!error) {
+            NSLog(@"Save成功");
+        }
+        else{
+            // Error
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
     
+    
+    //Post一覧に遷移
+    PostTableViewController *postTableViewController =  [self.storyboard instantiateViewControllerWithIdentifier:@"postTableViewController"];
+    [self presentViewController:postTableViewController animated:YES completion:nil];
 }
+
 
 @end
