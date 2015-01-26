@@ -66,13 +66,10 @@
     // ユーザデフォルトのAirportのIDを呼び出す
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     self.airportId = [defaults stringForKey:@"airportId"];
-    NSLog(@"ゆーざでふぉると%@", self.airportId);
     
     // AirportIdと一致するデータをfindする
-    [query whereKey:@"airportId" equalTo: self.airportId];
-    NSLog(@"%@", query);
+    [query whereKey:@"AirportID" equalTo: self.airportId];
     self.dataOfParse = query.findObjects;
-    NSLog(@"%@", self.dataOfParse);
 }
 
 

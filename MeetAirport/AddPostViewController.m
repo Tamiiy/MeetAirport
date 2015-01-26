@@ -119,6 +119,10 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
     insertObject[@"DepartureTime"] = self.tmpDate;
     PFFile *imageFile = [PFFile fileWithName:@"Image.jpg" data:self.imgData];
     insertObject[@"Image"] = imageFile;
+    // ユーザデフォルトのAirportのIDを呼び出して、objectに格納
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *airportId = [defaults stringForKey:@"airportId"];
+    insertObject[@"AirportID"] = airportId;
 
     [insertObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error) {
@@ -130,7 +134,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
     }];
     
     // Post一覧に遷移
-    PostTableViewController *postTableViewController =  [self.storyboard instantiateViewControllerWithIdentifier:@"postTableViewController"];
+    PostTableViewController *postTableViewController =  [self.storyboard instantiateViewControllerWithIdentifier:@"postNavigationController"];
     [self presentViewController:postTableViewController animated:YES completion:nil];
 }
 
