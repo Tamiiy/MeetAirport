@@ -56,19 +56,10 @@
 }
 
 
-//-(void)tableView:(UITableView *)tv didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    NSInteger row = [[self.tableView indexPathForSelectedRow] row];
-//    
-//    AddPostViewController *postView = [self.storyboard instantiateViewControllerWithIdentifier:@"postView"];
-//    postView.selectedNationality = self.countries[row];
-//    NSLog(@"これが選択されたこくせき%@", postView.selectedNationality);
-//}
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     NSInteger selectedRow = [self.tableView indexPathForSelectedRow].row;
-    AddPostViewController *postView = [segue destinationViewController];
-    postView.selectedNationality = self.countries[selectedRow];
+    self.selectedCountry = self.countries[selectedRow];
 }
 
 

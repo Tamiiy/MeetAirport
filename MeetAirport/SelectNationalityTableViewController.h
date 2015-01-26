@@ -10,4 +10,6 @@
 
 @interface SelectNationalityTableViewController : UITableViewController
 
+@property (nonatomic) NSString *selectedCountry;
+
 @end

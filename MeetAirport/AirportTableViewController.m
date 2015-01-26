@@ -7,6 +7,7 @@
 //
 
 #import "AirportTableViewController.h"
+#import "PostTableViewController.h"
 
 @interface AirportTableViewController ()
 
@@ -49,8 +50,8 @@
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"airportListCell"];
     
     // AirPort名と国名だけ取り出して一覧表示する
-    NSArray* names = (NSArray*)[_airportList valueForKey:@"name"];
-    NSArray* countries = (NSArray*)[_airportList valueForKey:@"country"];
+    NSArray* names = (NSArray*)[self.airportList valueForKey:@"name"];
+    NSArray* countries = (NSArray*)[self.airportList valueForKey:@"country"];
 
     NSInteger row = indexPath.row;
     
@@ -62,6 +63,22 @@
 
     return cell;
 }
+
+-(void)tableView:(UITableView *)tv didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSInteger selectedRow = indexPath.row;
+    
+    NSArray *airportId = (NSArray*)[self.airportList valueForKey:@"code"];
+    
+    //ユーザデフォルトに、選択されたAirportのIDを格納
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject: airportId[selectedRow] forKey:@"airportId"];
+    //synchronize: すぐに保存したいときに利用
+    [defaults synchronize];
+    
+    PostTableViewController *postListNavi = [self.storyboard instantiateViewControllerWithIdentifier:@"postListNavi"];
+    [self presentViewController:postListNavi animated:YES completion:nil];
+}
+
 
 /*
 // Override to support conditional editing of the table view.

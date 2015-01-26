@@ -13,7 +13,7 @@
 @property (nonatomic, retain) NSMutableDictionary *sections;
 @property (nonatomic, retain) NSMutableDictionary *sectionToSportTypeMap;
 @property (nonatomic, retain) NSArray *dataOfParse;
-;
+@property (nonatomic, retain) NSString *airportId;
 @end
 
 @implementation PostTableViewController
@@ -62,8 +62,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
+    
+    // ユーザデフォルトのAirportのIDを呼び出す
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    self.airportId = [defaults stringForKey:@"airportId"];
+    NSLog(@"ゆーざでふぉると%@", self.airportId);
+    
+    // AirportIdと一致するデータをfindする
+    [query whereKey:@"airportId" equalTo: self.airportId];
+    NSLog(@"%@", query);
     self.dataOfParse = query.findObjects;
+    NSLog(@"%@", self.dataOfParse);
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -97,6 +108,13 @@
     [cell setDataOfParse:self.dataOfParse[row]];
     return cell;
 }
+
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+//{
+//    NSInteger selectedRow = [self.tableView indexPathForSelectedRow].row;
+//    AddPostViewController *postView = [segue destinationViewController];
+//    postView.selectedNationality = self.countries[selectedRow];
+//}
 
 /*
 // Override to support conditional editing of the table view.

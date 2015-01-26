@@ -8,6 +8,7 @@
 
 #import "AddPostViewController.h"
 #import "PostTableViewController.h"
+#import "SelectNationalityTableViewController.h"
 #import <Parse/Parse.h>
 
 @interface AddPostViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, RMDateSelectionViewControllerDelegate>
@@ -20,14 +21,10 @@
 
 @implementation AddPostViewController
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    //国籍が選択されたら、ラベルに入れ直す
-    if (self.selectedNationality != nil) {
-        self.outputNationality.text = self.selectedNationality;
-    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -37,10 +34,23 @@
 
 
 /**
+ * 国籍選択から戻ってきたときのセグエ処理
+ */
+
+- (IBAction)firstViewReturnActionForSegue:(UIStoryboardSegue *)segue
+{
+    if ([segue.identifier isEqualToString:@"backToAddPost"]) {
+        SelectNationalityTableViewController *selectNationalityTableView = segue.sourceViewController;
+        self.outputNationality.text = selectNationalityTableView.selectedCountry;
+    }
+}
+
+
+/**
  * 画像をカメラロールから取得してUIViewに表示
  */
 
-//カメラロールの起動と画像選択処理
+// カメラロールの起動と画像選択処理
 - (IBAction)changePhoto:(id)sender {
     UIImagePickerControllerSourceType sourceType
     = UIImagePickerControllerSourceTypePhotoLibrary;
@@ -51,7 +61,7 @@
         [self presentViewController:picker animated:YES completion:NULL];
     }
 }
-//画像選択後にUIimageViewに表示させる
+// 画像選択後にUIimageViewに表示させる
 - (void)imagePickerController:(UIImagePickerController *)picker
 didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
@@ -75,23 +85,23 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
     dateSelectionVC.delegate = self;
     [dateSelectionVC show];
 }
-//NSDate → NSString に変換する関数
+// NSDate → NSString に変換する関数
 + (NSString*)dateToString:(NSDate *)baseDate formatString:(NSString *)formatString
 {
     NSDateFormatter *inputDateFormatter = [[NSDateFormatter alloc] init];
-    //24時間表示 & iPhoneの現在の設定に合わせる
+    // 24時間表示 & iPhoneの現在の設定に合わせる
     [inputDateFormatter setLocale:[NSLocale currentLocale]];
     [inputDateFormatter setDateFormat:formatString];
     NSString *str = [inputDateFormatter stringFromDate:baseDate];
     return str;
 }
-//時刻設定完了時の処理
+// 時刻設定完了時の処理
 - (void)dateSelectionViewController:(RMDateSelectionViewController *)vc didSelectDate:(NSDate *)aDate {
     NSString *dateStr = [AddPostViewController dateToString:aDate formatString:@"yyyy-MM-dd HH:mm"];
     self.tmpDate = aDate;
     self.outputTime.text = dateStr;
 }
-//時刻設定キャンセル時の処理
+// 時刻設定キャンセル時の処理
 - (void)dateSelectionViewControllerDidCancel:(RMDateSelectionViewController *)vc {
     //Do Nothing
 }
@@ -115,13 +125,11 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
             NSLog(@"Save成功");
         }
         else{
-            // Error
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
     }];
     
-    
-    //Post一覧に遷移
+    // Post一覧に遷移
     PostTableViewController *postTableViewController =  [self.storyboard instantiateViewControllerWithIdentifier:@"postTableViewController"];
     [self presentViewController:postTableViewController animated:YES completion:nil];
 }

@@ -128,7 +128,7 @@
         <!--Add Post View Controller-->
         <scene sceneID="s2U-8B-tRm">
             <objects>
-                <viewController storyboardIdentifier="postView" id="3CP-Qo-f2W" customClass="AddPostViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="addPostView" id="3CP-Qo-f2W" customClass="AddPostViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Gof-f7-D7o"/>
                         <viewControllerLayoutGuide type="bottom" id="Ojk-J6-sdJ"/>
@@ -534,7 +534,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="3CP-Qo-f2W" kind="presentation" id="yOT-zN-laN"/>
+                                    <segue destination="NHK-cD-lJk" kind="unwind" identifier="backToAddPost" unwindAction="firstViewReturnActionForSegue:" id="V4q-MI-F0F"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -546,6 +546,7 @@
                     <navigationItem key="navigationItem" title="Select Nationality" id="JW6-Ta-JqT"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YJ1-E8-BLT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="NHK-cD-lJk" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="6114" y="-1377"/>
         </scene>
@@ -553,6 +554,7 @@
         <scene sceneID="78k-tH-Fw2">
             <objects>
                 <navigationController id="tXr-Yb-PPF" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Ju6-Zn-g8E"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="cfJ-9H-Hdc">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -799,8 +801,9 @@
         <!--Navigation Controller-->
         <scene sceneID="XiS-U2-ypV">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8X9-01-L5a" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="postListNavi" automaticallyAdjustsScrollViewInsets="NO" id="8X9-01-L5a" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="hCf-AI-8dg"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="b0C-Hz-2YU">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -818,7 +821,4 @@
     <resources>
         <image name="スクリーンショット 2015-01-11 19.51.10.png" width="179" height="177"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="atl-Be-cmD"/>
-    </inferredMetricsTieBreakers>
 </document>
