@@ -24,10 +24,10 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     NSData *json_data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
     NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:json_data options:NSJSONReadingAllowFragments error:nil];
-    NSLog(@"じぇーそん%@",jsonObject);
     
     NSInteger count = 0;
     NSMutableArray *countriesName = [NSMutableArray array];
+    
     for (id key in [jsonObject allKeys]) {
         [countriesName addObject:[jsonObject valueForKey:key]];
         count ++;

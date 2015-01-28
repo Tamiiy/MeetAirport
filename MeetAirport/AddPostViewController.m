@@ -32,28 +32,16 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+/**
+ * 国籍選択から戻ってきたときの処理
+ */
+
 - (void)viewWillAppear:(BOOL)animated {
     // ユーザデフォルトの国籍を呼び出して、文字列として出力
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *nationality = [defaults stringForKey:@"nationality"];
-    NSLog(@"こくせき%@",nationality);
     self.outputNationality.text = nationality;
-}
-
-/**
- * 国籍選択から戻ってきたときのセグエ処理
- */
-
-- (IBAction)firstViewReturnActionForSegue:(UIStoryboardSegue *)segue
-{
-    if ([segue.identifier isEqualToString:@"backToAddPost"]) {
-        // ユーザデフォルトの国籍を呼び出して、文字列として出力
-//        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//        NSString *nationality = [defaults stringForKey:@"nationality"];
-//        self.outputNationality.text = nationality;
-//        SelectNationalityTableViewController *selectNationalityTableView = segue.sourceViewController;
-//        self.outputNationality.text = selectNationalityTableView.selectedCountry;
-    }
 }
 
 

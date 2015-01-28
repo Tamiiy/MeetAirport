@@ -17,14 +17,10 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-    
     // Configure the view for the selected state
 }
 
 - (void)setDataOfComments:(NSDictionary *)dataOfComments {
-    NSLog(@"==========================");
-    NSLog(@"セルから出力してるぜよ%@",dataOfComments);
-    NSLog(@"==========================");
     
     //string系の表示
     self.nameLabel.text = dataOfComments[@"userName"];
@@ -35,11 +31,9 @@
         if (!error)
         {
             UIImage *image = [UIImage imageWithData:data];
-            NSLog(@"%@",image);
             self.userImg.image = image;
         }
     }];
-    
 }
 
 

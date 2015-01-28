@@ -22,7 +22,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     // objectIdと一致するPostをfindする(1データ) / 1データ用のfindメソッドありそう・・
     PFQuery *queryPost = [PFQuery queryWithClassName:@"Post"];
     [queryPost whereKey:@"objectId" equalTo: self.selectedObjectId];
@@ -36,7 +35,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    
+    // INSERT後に、即時反映するための処理をかく(あとで)
 }
 
 - (void)reload {
@@ -70,11 +69,12 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
-        // 1段目だけ、PostTableViewと同じ表示をする
+        // 1行目だけ、PostTableViewと同じ表示をする
         PostTableViewCell *postCell = [tableView dequeueReusableCellWithIdentifier:@"postCell" forIndexPath:indexPath];
         [postCell setDataOfParse: self.dataOfPost];
         return postCell;
     } else {
+        // 2行目以降は、CommentTableViewCellの形で表示
         CommentTableViewCell *commentCell = [tableView dequeueReusableCellWithIdentifier:@"commentCell" forIndexPath:indexPath];
         NSInteger row = indexPath.row;
         NSDictionary *commentData = self.dataOfComment[row];
@@ -98,7 +98,7 @@
         case 1:
             return @"COMMENT";
         default:
-            return @"セクション-";
+            return @"セクション";
     }
 }
 
@@ -106,12 +106,11 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"goToAddComment"]) {
+        // コメント追加画面にいくときに、POSTのIDを渡す
         AddCommentViewController *addCommentView = [segue destinationViewController];
         addCommentView.selectedObjectId = self.selectedObjectId;
     }
 }
-
-
 
 
 /*

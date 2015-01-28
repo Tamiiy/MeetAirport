@@ -48,12 +48,11 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"airportListCell"];
+    NSInteger row = indexPath.row;
     
     // AirPort名と国名だけ取り出して一覧表示する
     NSArray* names = (NSArray*)[self.airportList valueForKey:@"name"];
     NSArray* countries = (NSArray*)[self.airportList valueForKey:@"country"];
-
-    NSInteger row = indexPath.row;
     
     NSString *nameData = names[row];
     NSString *countryData = countries[row];
@@ -78,21 +77,6 @@
     PostTableViewController *postListNavi = [self.storyboard instantiateViewControllerWithIdentifier:@"postTableViewController"];
     [self.navigationController pushViewController:postListNavi animated:YES];
 }
-
-//セグエでなぜか遷移しないよ〜
-//-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-//{
-//    NSInteger selectedRow = [self.tableView indexPathForSelectedRow].row;;
-//    NSArray *airportId = (NSArray*)[self.airportList valueForKey:@"code"];
-//    
-//    //ユーザデフォルトに、選択されたAirportのIDを格納
-//    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-//    [defaults setObject: airportId[selectedRow] forKey:@"airportId"];
-//    //synchronize: すぐに保存したいときに利用
-//    [defaults synchronize];
-//
-//     PostTableViewController *postListNavi = [segue destinationViewController];
-//}
 
 
 /*

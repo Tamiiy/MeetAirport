@@ -20,44 +20,6 @@
 @implementation PostTableViewController
 
 
-//- (id)initWithCoder:(NSCoder*)decoder {
-//    self = [super initWithCoder:decoder];
-//    if (self) {
-//        self.parseClassName = @"Post";
-//        self.pullToRefreshEnabled = YES;
-//        self.paginationEnabled = NO;
-//        self.objectsPerPage = 25;
-//    }
-//    return self;
-//}
-
-/* 検証用
-- (void)objectsWillLoad {
-    NSLog(@"hogehoge");
-}
-
-- (void)objectsDidLoad:(NSError *)error {
-    NSLog(@"fugafuga");
-}
-*/
-
-//PFQueryTableViewControllerの仕組み上、queryを返さないと落ちるみたい
-//- (PFQuery *)queryForTable {
-//    PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
-//
-//    //なぜか落ちる
-////    if (self.pullToRefreshEnabled) {
-////        query.cachePolicy = kPFCachePolicyNetworkOnly;
-////    }
-////    if (self.objects.count == 0) {
-////        query.cachePolicy = kPFCachePolicyCacheThenNetwork;
-////    }
-//    
-//    [query orderByDescending:@"createdAt"];
-//    return query;
-//}
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     PFQuery *query = [PFQuery queryWithClassName:@"Post"];
@@ -90,12 +52,6 @@
     return count;
 }
 
-//- (PFObject *)objectAtIndexPath:(NSIndexPath *)indexPath {
-//    NSNumber *rowIndex = [rowIndecesInSection objectAtIndex:indexPath.row];
-//    return [self.objects objectAtIndex:[rowIndex intValue]];
-//}
-
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PostTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"postCell" forIndexPath:indexPath];
     NSInteger row = indexPath.row;
@@ -105,12 +61,11 @@
     return cell;
 }
 
-
 -(void)tableView:(UITableView *)tv didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSInteger selectedRow = indexPath.row;
     
     CommentTableViewController *commentView = [self.storyboard instantiateViewControllerWithIdentifier:@"commentView"];
-    
+    // 選択されたPOSTのオブジェクトIDを渡す
     PFObject *myObject = self.dataOfParse[selectedRow];
     commentView.selectedObjectId = [myObject objectId];
 
