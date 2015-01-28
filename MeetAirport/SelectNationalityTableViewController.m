@@ -19,9 +19,24 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    NSURL *url = [NSURL URLWithString:@"https://raw.githubusercontent.com/umpirsky/country-list/master/country/cldr/en/country.json"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    NSData *json_data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:json_data options:NSJSONReadingAllowFragments error:nil];
+    NSLog(@"じぇーそん%@",jsonObject);
     
+    NSInteger count = 0;
+    NSMutableArray *countriesName = [NSMutableArray array];
+    for (id key in [jsonObject allKeys]) {
+        [countriesName addObject:[jsonObject valueForKey:key]];
+        count ++;
+    }
+    self.countries = countriesName;
+
+   
     // 国表示のテストのための配列
-    self.countries = [NSArray arrayWithObjects:@"Japan", @"Philippines", @"Korea", @"Thai", @"America", @"Brazil", nil];
+//    self.countries = [NSArray arrayWithObjects:@"Japan", @"Philippines", @"Korea", @"Thai", @"America", @"Brazil", nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -38,7 +53,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 6;
+    return self.countries.count;
 }
 
 
@@ -50,17 +65,26 @@
 //    NSArray* countries = (NSArray*)[_airportList valueForKey:@"country"];
     
     NSInteger row = indexPath.row;
+
+
     cell.textLabel.text = self.countries[row];
     
     return cell;
 }
 
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    NSInteger selectedRow = [self.tableView indexPathForSelectedRow].row;
-    self.selectedCountry = self.countries[selectedRow];
+-(void)tableView:(UITableView *)tv didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSInteger selectedRow = indexPath.row;
+    //ユーザデフォルトに国籍を保存
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject: self.countries[selectedRow] forKey:@"nationality"];
+    //synchronize: すぐに保存したいときに利用
+    [defaults synchronize];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+
+
 
 
 /*

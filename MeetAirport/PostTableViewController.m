@@ -8,6 +8,7 @@
 
 #import "PostTableViewController.h"
 #import "PostTableViewCell.h"
+#import "CommentTableViewController.h"
 
 @interface PostTableViewController ()
 @property (nonatomic, retain) NSMutableDictionary *sections;
@@ -18,19 +19,17 @@
 
 @implementation PostTableViewController
 
-@synthesize sections = _sections;
-@synthesize sectionToSportTypeMap = _sectionToSportTypeMap;
 
-- (id)initWithCoder:(NSCoder*)decoder {
-    self = [super initWithCoder:decoder];
-    if (self) {
-        self.parseClassName = @"Post";
-        self.pullToRefreshEnabled = YES;
-        self.paginationEnabled = NO;
-        self.objectsPerPage = 25;
-    }
-    return self;
-}
+//- (id)initWithCoder:(NSCoder*)decoder {
+//    self = [super initWithCoder:decoder];
+//    if (self) {
+//        self.parseClassName = @"Post";
+//        self.pullToRefreshEnabled = YES;
+//        self.paginationEnabled = NO;
+//        self.objectsPerPage = 25;
+//    }
+//    return self;
+//}
 
 /* 検証用
 - (void)objectsWillLoad {
@@ -43,32 +42,32 @@
 */
 
 //PFQueryTableViewControllerの仕組み上、queryを返さないと落ちるみたい
-- (PFQuery *)queryForTable {
-    PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
-
-    //なぜか落ちる
-//    if (self.pullToRefreshEnabled) {
-//        query.cachePolicy = kPFCachePolicyNetworkOnly;
-//    }
-//    if (self.objects.count == 0) {
-//        query.cachePolicy = kPFCachePolicyCacheThenNetwork;
-//    }
-    
-    [query orderByDescending:@"createdAt"];
-    return query;
-}
+//- (PFQuery *)queryForTable {
+//    PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
+//
+//    //なぜか落ちる
+////    if (self.pullToRefreshEnabled) {
+////        query.cachePolicy = kPFCachePolicyNetworkOnly;
+////    }
+////    if (self.objects.count == 0) {
+////        query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+////    }
+//    
+//    [query orderByDescending:@"createdAt"];
+//    return query;
+//}
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
+    PFQuery *query = [PFQuery queryWithClassName:@"Post"];
     
     // ユーザデフォルトのAirportのIDを呼び出す
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     self.airportId = [defaults stringForKey:@"airportId"];
     
     // AirportIdと一致するデータをfindする
-    [query whereKey:@"AirportID" equalTo: self.airportId];
+    [query whereKey:@"airportId" equalTo: self.airportId];
     self.dataOfParse = query.findObjects;
 }
 
@@ -106,12 +105,17 @@
     return cell;
 }
 
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-//{
-//    NSInteger selectedRow = [self.tableView indexPathForSelectedRow].row;
-//    AddPostViewController *postView = [segue destinationViewController];
-//    postView.selectedNationality = self.countries[selectedRow];
-//}
+
+-(void)tableView:(UITableView *)tv didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSInteger selectedRow = indexPath.row;
+    
+    CommentTableViewController *commentView = [self.storyboard instantiateViewControllerWithIdentifier:@"commentView"];
+    
+    PFObject *myObject = self.dataOfParse[selectedRow];
+    commentView.selectedObjectId = [myObject objectId];
+
+    [self.navigationController pushViewController:commentView animated:YES];
+}
 
 /*
 // Override to support conditional editing of the table view.

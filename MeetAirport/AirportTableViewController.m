@@ -75,9 +75,24 @@
     //synchronize: すぐに保存したいときに利用
     [defaults synchronize];
     
-    PostTableViewController *postListNavi = [self.storyboard instantiateViewControllerWithIdentifier:@"postListNavi"];
-    [self presentViewController:postListNavi animated:YES completion:nil];
+    PostTableViewController *postListNavi = [self.storyboard instantiateViewControllerWithIdentifier:@"postTableViewController"];
+    [self.navigationController pushViewController:postListNavi animated:YES];
 }
+
+//セグエでなぜか遷移しないよ〜
+//-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+//{
+//    NSInteger selectedRow = [self.tableView indexPathForSelectedRow].row;;
+//    NSArray *airportId = (NSArray*)[self.airportList valueForKey:@"code"];
+//    
+//    //ユーザデフォルトに、選択されたAirportのIDを格納
+//    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+//    [defaults setObject: airportId[selectedRow] forKey:@"airportId"];
+//    //synchronize: すぐに保存したいときに利用
+//    [defaults synchronize];
+//
+//     PostTableViewController *postListNavi = [segue destinationViewController];
+//}
 
 
 /*

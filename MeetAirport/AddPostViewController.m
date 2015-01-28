@@ -32,6 +32,13 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    // ユーザデフォルトの国籍を呼び出して、文字列として出力
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *nationality = [defaults stringForKey:@"nationality"];
+    NSLog(@"こくせき%@",nationality);
+    self.outputNationality.text = nationality;
+}
 
 /**
  * 国籍選択から戻ってきたときのセグエ処理
@@ -40,8 +47,12 @@
 - (IBAction)firstViewReturnActionForSegue:(UIStoryboardSegue *)segue
 {
     if ([segue.identifier isEqualToString:@"backToAddPost"]) {
-        SelectNationalityTableViewController *selectNationalityTableView = segue.sourceViewController;
-        self.outputNationality.text = selectNationalityTableView.selectedCountry;
+        // ユーザデフォルトの国籍を呼び出して、文字列として出力
+//        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//        NSString *nationality = [defaults stringForKey:@"nationality"];
+//        self.outputNationality.text = nationality;
+//        SelectNationalityTableViewController *selectNationalityTableView = segue.sourceViewController;
+//        self.outputNationality.text = selectNationalityTableView.selectedCountry;
     }
 }
 
@@ -113,16 +124,18 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 
 - (IBAction)insertPost:(id)sender {
     PFObject *insertObject = [PFObject objectWithClassName:@"Post"];
-    insertObject[@"Name"] = self.inputName.text;
-    insertObject[@"Title"] = self.inputTitle.text;
-    insertObject[@"Contents"] = self.inputContents.text;
-    insertObject[@"DepartureTime"] = self.tmpDate;
-    PFFile *imageFile = [PFFile fileWithName:@"Image.jpg" data:self.imgData];
-    insertObject[@"Image"] = imageFile;
+    insertObject[@"userName"] = self.inputName.text;
+    insertObject[@"nationality"] = self.outputNationality.text;
+    insertObject[@"title"] = self.inputTitle.text;
+    insertObject[@"contents"] = self.inputContents.text;
+    insertObject[@"departureTime"] = self.tmpDate;
+    PFFile *imageFile = [PFFile fileWithName:@"image.jpg" data:self.imgData];
+    insertObject[@"userImg"] = imageFile;
+    
     // ユーザデフォルトのAirportのIDを呼び出して、objectに格納
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *airportId = [defaults stringForKey:@"airportId"];
-    insertObject[@"AirportID"] = airportId;
+    insertObject[@"airportId"] = airportId;
 
     [insertObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error) {
@@ -134,8 +147,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
     }];
     
     // Post一覧に遷移
-    PostTableViewController *postTableViewController =  [self.storyboard instantiateViewControllerWithIdentifier:@"postNavigationController"];
-    [self presentViewController:postTableViewController animated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 

@@ -22,6 +22,9 @@
 		CEE0D50D1A5CD69D009FBBB5 /* MeetAirportTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D50C1A5CD69D009FBBB5 /* MeetAirportTests.m */; };
 		CEE0D55A1A5F643C009FBBB5 /* AirportTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D5591A5F643C009FBBB5 /* AirportTableViewController.m */; };
 		CEE0D55D1A62B0E8009FBBB5 /* PostTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D55C1A62B0E8009FBBB5 /* PostTableViewCell.m */; };
+		CEEB406F1A75E628009B14AB /* CommentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEB406E1A75E628009B14AB /* CommentTableViewController.m */; };
+		CEEB40721A768A54009B14AB /* CommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEB40711A768A54009B14AB /* CommentTableViewCell.m */; };
+		CEEB40781A772D25009B14AB /* AddCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEB40771A772D25009B14AB /* AddCommentViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +66,12 @@
 		CEE0D5591A5F643C009FBBB5 /* AirportTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AirportTableViewController.m; sourceTree = "<group>"; };
 		CEE0D55B1A62B0E8009FBBB5 /* PostTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostTableViewCell.h; sourceTree = "<group>"; };
 		CEE0D55C1A62B0E8009FBBB5 /* PostTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostTableViewCell.m; sourceTree = "<group>"; };
+		CEEB406D1A75E628009B14AB /* CommentTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentTableViewController.h; sourceTree = "<group>"; };
+		CEEB406E1A75E628009B14AB /* CommentTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentTableViewController.m; sourceTree = "<group>"; };
+		CEEB40701A768A54009B14AB /* CommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentTableViewCell.h; sourceTree = "<group>"; };
+		CEEB40711A768A54009B14AB /* CommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentTableViewCell.m; sourceTree = "<group>"; };
+		CEEB40761A772D25009B14AB /* AddCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddCommentViewController.h; sourceTree = "<group>"; };
+		CEEB40771A772D25009B14AB /* AddCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCommentViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,12 +142,18 @@
 				CEE0D5591A5F643C009FBBB5 /* AirportTableViewController.m */,
 				CE90838E1A635DBE00E6FC33 /* PostTableViewController.h */,
 				CE90838F1A635DBE00E6FC33 /* PostTableViewController.m */,
+				CEEB406D1A75E628009B14AB /* CommentTableViewController.h */,
+				CEEB406E1A75E628009B14AB /* CommentTableViewController.m */,
 				CEE0D55B1A62B0E8009FBBB5 /* PostTableViewCell.h */,
 				CEE0D55C1A62B0E8009FBBB5 /* PostTableViewCell.m */,
+				CEEB40701A768A54009B14AB /* CommentTableViewCell.h */,
+				CEEB40711A768A54009B14AB /* CommentTableViewCell.m */,
 				CE725D2F1A6CA4AB00BA2389 /* AddPostViewController.h */,
 				CE725D301A6CA4AB00BA2389 /* AddPostViewController.m */,
 				CE725D321A6CB17C00BA2389 /* SelectNationalityTableViewController.h */,
 				CE725D331A6CB17C00BA2389 /* SelectNationalityTableViewController.m */,
+				CEEB40761A772D25009B14AB /* AddCommentViewController.h */,
+				CEEB40771A772D25009B14AB /* AddCommentViewController.m */,
 				CEE0D4FD1A5CD69D009FBBB5 /* Images.xcassets */,
 				CEE0D4FF1A5CD69D009FBBB5 /* LaunchScreen.xib */,
 				CEE0D4F41A5CD69D009FBBB5 /* MeetAirport.xcdatamodeld */,
@@ -314,7 +329,10 @@
 				CEE0D55A1A5F643C009FBBB5 /* AirportTableViewController.m in Sources */,
 				CE9083901A635DBE00E6FC33 /* PostTableViewController.m in Sources */,
 				CEE0D55D1A62B0E8009FBBB5 /* PostTableViewCell.m in Sources */,
+				CEEB40781A772D25009B14AB /* AddCommentViewController.m in Sources */,
 				CEE0D4F31A5CD69D009FBBB5 /* AppDelegate.m in Sources */,
+				CEEB406F1A75E628009B14AB /* CommentTableViewController.m in Sources */,
+				CEEB40721A768A54009B14AB /* CommentTableViewCell.m in Sources */,
 				CEE0D4F01A5CD69D009FBBB5 /* main.m in Sources */,
 				CE725D341A6CB17C00BA2389 /* SelectNationalityTableViewController.m in Sources */,
 				CEE0D4F91A5CD69D009FBBB5 /* ViewController.m in Sources */,
