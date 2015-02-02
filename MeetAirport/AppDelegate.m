@@ -17,6 +17,10 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+NSLog(@"%f", self.window.frame.size.height);
+NSLog(@"%f", self.window.frame.size.width);
+    
     [Parse enableLocalDatastore];
     
     // Initialize Parse.
@@ -26,7 +30,9 @@
     // [Optional] Track statistics around application opens.
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
-    // Override point for customization after application launch.
+    // 一括でラベルのフォントをAppleSDGothicNeo-Thinのサイズ18.0fに統一する
+    [[UILabel appearance] setFont:[UIFont fontWithName:@"AppleSDGothicNeo-Thin" size:18.0f]];
+    
     return YES;
 }
 

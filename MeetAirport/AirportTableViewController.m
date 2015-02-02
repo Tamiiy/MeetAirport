@@ -22,12 +22,40 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //Airport一覧のデータを取得して、辞書型airportListに代入
-    NSURL *url = [NSURL URLWithString:@"https://gist.githubusercontent.com/tdreyno/4278655/raw/755b1cfc5ded72d7b45f97b9c7295d525be18780/airports.json"];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    NSData *json_data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-    NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:json_data options:NSJSONReadingAllowFragments error:nil];
-    self.airportList = jsonObject;
+    // ユーザデフォルトのAirportのデータを呼び出す
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    // キャッシュがあれば、UserDefaultのデータを入れて終了
+    if ([defaults stringForKey:@"airportList"] != nil) {
+        self.airportList = [defaults dictionaryForKey:@"airportList"];
+    } else {
+    // なければ、jsonからデータを取得する
+        //Airport一覧のデータを取得して、辞書型airportListに代入
+        NSURL *url = [NSURL URLWithString:@"https://gist.githubusercontent.com/tdreyno/4278655/raw/755b1cfc5ded72d7b45f97b9c7295d525be18780/airports.json"];
+        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    
+        NSURLResponse *response = nil;
+        NSError *error = nil;
+    
+        NSData *json_data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    
+        if (json_data != nil) {
+            NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:json_data options:NSJSONReadingAllowFragments error:nil];
+            self.airportList = jsonObject;
+
+            // plistに、最新のjson情報を格納
+            // ホームディレクトリを取得
+            NSString *homeDir = NSHomeDirectory();
+            // 書き込みたいplistのパスを作成
+            NSString *filePath = [homeDir stringByAppendingPathComponent:@"airportList.plist"];
+            // 書き込み
+            BOOL result = [self.airportList writeToFile:filePath atomically:YES];
+            if (!result) {
+                NSLog(@"ファイルの書き込みに失敗");
+            } else {
+                NSLog(@"ファイルの書き込みが完了しました");
+            }
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -59,6 +87,9 @@
     
     cell.textLabel.text = nameData;
     cell.detailTextLabel.text = countryData;
+    
+    // 一括でラベルのフォントをAppleSDGothicNeo-Thinのサイズ20.0fに統一する
+    cell.textLabel.font = [UIFont fontWithName:@"AppleSDGothicNeo-Thin" size:20.0f];
 
     return cell;
 }

@@ -8,10 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		B62DAB2172A87F824A7AA7C7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6839C4AC2D891AAEBCFB2940 /* libPods.a */; };
+		CE0D5F0C1A79D85100A05E47 /* topFemale.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE0D5F0B1A79D85100A05E47 /* topFemale.jpg */; };
+		CE5AE0071A7F15FD00E1937D /* airportList.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE5AE0061A7F15FD00E1937D /* airportList.plist */; };
 		CE725D311A6CA4AB00BA2389 /* AddPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE725D301A6CA4AB00BA2389 /* AddPostViewController.m */; };
 		CE725D341A6CB17C00BA2389 /* SelectNationalityTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE725D331A6CB17C00BA2389 /* SelectNationalityTableViewController.m */; };
 		CE9083901A635DBE00E6FC33 /* PostTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE90838F1A635DBE00E6FC33 /* PostTableViewController.m */; };
-		CE9083921A64AE8100E6FC33 /* スクリーンショット 2015-01-11 19.51.10.png in Resources */ = {isa = PBXBuildFile; fileRef = CE9083911A64AE8100E6FC33 /* スクリーンショット 2015-01-11 19.51.10.png */; };
+		CECB0A101A78925B0071BD51 /* topImg01.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CECB0A0F1A78925B0071BD51 /* topImg01.jpg */; };
 		CEE0D4F01A5CD69D009FBBB5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D4EF1A5CD69D009FBBB5 /* main.m */; };
 		CEE0D4F31A5CD69D009FBBB5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D4F21A5CD69D009FBBB5 /* AppDelegate.m */; };
 		CEE0D4F61A5CD69D009FBBB5 /* MeetAirport.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D4F41A5CD69D009FBBB5 /* MeetAirport.xcdatamodeld */; };
@@ -41,13 +43,15 @@
 		0A290A0C36D186C4D7924E51 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		6839C4AC2D891AAEBCFB2940 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB93C2753D283EF30626EAF0 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		CE0D5F0B1A79D85100A05E47 /* topFemale.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = topFemale.jpg; sourceTree = "<group>"; };
+		CE5AE0061A7F15FD00E1937D /* airportList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = airportList.plist; sourceTree = "<group>"; };
 		CE725D2F1A6CA4AB00BA2389 /* AddPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddPostViewController.h; sourceTree = "<group>"; };
 		CE725D301A6CA4AB00BA2389 /* AddPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddPostViewController.m; sourceTree = "<group>"; };
 		CE725D321A6CB17C00BA2389 /* SelectNationalityTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectNationalityTableViewController.h; sourceTree = "<group>"; };
 		CE725D331A6CB17C00BA2389 /* SelectNationalityTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectNationalityTableViewController.m; sourceTree = "<group>"; };
 		CE90838E1A635DBE00E6FC33 /* PostTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostTableViewController.h; sourceTree = "<group>"; };
 		CE90838F1A635DBE00E6FC33 /* PostTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostTableViewController.m; sourceTree = "<group>"; };
-		CE9083911A64AE8100E6FC33 /* スクリーンショット 2015-01-11 19.51.10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "スクリーンショット 2015-01-11 19.51.10.png"; path = "../../../../../Desktop/スクリーンショット 2015-01-11 19.51.10.png"; sourceTree = "<group>"; };
+		CECB0A0F1A78925B0071BD51 /* topImg01.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = topImg01.jpg; sourceTree = "<group>"; };
 		CEE0D4EA1A5CD69D009FBBB5 /* MeetAirport.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeetAirport.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEE0D4EE1A5CD69D009FBBB5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEE0D4EF1A5CD69D009FBBB5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -165,8 +169,10 @@
 		CEE0D4ED1A5CD69D009FBBB5 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				CE9083911A64AE8100E6FC33 /* スクリーンショット 2015-01-11 19.51.10.png */,
+				CE0D5F0B1A79D85100A05E47 /* topFemale.jpg */,
+				CECB0A0F1A78925B0071BD51 /* topImg01.jpg */,
 				CEE0D4EE1A5CD69D009FBBB5 /* Info.plist */,
+				CE5AE0061A7F15FD00E1937D /* airportList.plist */,
 				CEE0D4EF1A5CD69D009FBBB5 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -271,10 +277,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE9083921A64AE8100E6FC33 /* スクリーンショット 2015-01-11 19.51.10.png in Resources */,
+				CECB0A101A78925B0071BD51 /* topImg01.jpg in Resources */,
 				CEE0D4FC1A5CD69D009FBBB5 /* Main.storyboard in Resources */,
+				CE5AE0071A7F15FD00E1937D /* airportList.plist in Resources */,
 				CEE0D5011A5CD69D009FBBB5 /* LaunchScreen.xib in Resources */,
 				CEE0D4FE1A5CD69D009FBBB5 /* Images.xcassets in Resources */,
+				CE0D5F0C1A79D85100A05E47 /* topFemale.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -459,6 +467,7 @@
 			baseConfigurationReference = 0A290A0C36D186C4D7924E51 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/parse-library-1.6.1",
@@ -479,6 +488,7 @@
 			baseConfigurationReference = BB93C2753D283EF30626EAF0 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/parse-library-1.6.1",

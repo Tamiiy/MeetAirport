@@ -29,6 +29,7 @@
     NSMutableArray *countriesName = [NSMutableArray array];
     
     for (id key in [jsonObject allKeys]) {
+        NSLog(@"%@,%@", key, [jsonObject valueForKey:key]);
         [countriesName addObject:[jsonObject valueForKey:key]];
         count ++;
     }
@@ -59,14 +60,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ContriesCell" forIndexPath:indexPath];
-
-    // 国名を取り出して一覧表示する(のちにAPI処理)
-//    NSArray* names = (NSArray*)[_airportList valueForKey:@"name"];
-//    NSArray* countries = (NSArray*)[_airportList valueForKey:@"country"];
     
     NSInteger row = indexPath.row;
-
-
     cell.textLabel.text = self.countries[row];
     
     return cell;
@@ -74,6 +69,7 @@
 
 -(void)tableView:(UITableView *)tv didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSInteger selectedRow = indexPath.row;
+    
     //ユーザデフォルトに国籍を保存
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject: self.countries[selectedRow] forKey:@"nationality"];
@@ -82,9 +78,6 @@
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
-
-
 
 
 /*

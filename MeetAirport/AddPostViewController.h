@@ -32,4 +32,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *sendButton;
 - (IBAction)insertPost:(id)sender;
 
+- (IBAction)cancel:(id)sender;
+
 @end

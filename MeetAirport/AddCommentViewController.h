@@ -25,8 +25,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *sendButton;
 - (IBAction)insertPost:(id)sender;
 
-
 @property (nonatomic) NSString *selectedObjectId;
+
+
+- (IBAction)cancel:(id)sender;
 
 
 @end
