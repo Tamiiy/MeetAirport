@@ -72,7 +72,7 @@
     
     //ユーザデフォルトに国籍を保存
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject: self.countries[selectedRow] forKey:@"nationality"];
+    [defaults setObject: self.countries[selectedRow] forKey:@"userNationality"];
     //synchronize: すぐに保存したいときに利用
     [defaults synchronize];
     

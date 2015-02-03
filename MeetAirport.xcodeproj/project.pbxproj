@@ -172,8 +172,8 @@
 				CE0D5F0B1A79D85100A05E47 /* topFemale.jpg */,
 				CECB0A0F1A78925B0071BD51 /* topImg01.jpg */,
 				CEE0D4EE1A5CD69D009FBBB5 /* Info.plist */,
-				CE5AE0061A7F15FD00E1937D /* airportList.plist */,
 				CEE0D4EF1A5CD69D009FBBB5 /* main.m */,
+				CE5AE0061A7F15FD00E1937D /* airportList.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";

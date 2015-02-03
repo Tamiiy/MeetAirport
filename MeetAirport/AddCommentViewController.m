@@ -20,7 +20,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    // ユーザ初期値設定
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    self.inputName.text = [defaults stringForKey:@"userName"];
+    NSData *imgData = [defaults dataForKey:@"userImg"];
+    self.userImage.image = [[UIImage alloc] initWithData:imgData];
+    self.imgData = imgData;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -37,9 +42,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     // ユーザデフォルトの国籍を呼び出して、文字列として出力
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *nationality = [defaults stringForKey:@"nationality"];
-    NSLog(@"こくせき%@",nationality);
-    self.outputNationality.text = nationality;
+    self.outputNationality.text = [defaults stringForKey:@"userNationality"];
 }
 
 

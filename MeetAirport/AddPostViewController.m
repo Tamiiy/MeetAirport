@@ -15,6 +15,7 @@
 
 @property NSDate *tmpDate;
 @property NSData *imgData;
+@property NSMutableDictionary *storeObject;
 
 
 @end
@@ -24,7 +25,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    // ユーザデフォルトのユーザ情報を呼び出して、初期値として出力(if文の分岐いらんのか?)
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    self.inputName.text = [defaults stringForKey:@"userName"];
+    NSData *imgData = [defaults dataForKey:@"userImg"];
+    self.userImage.image = [[UIImage alloc] initWithData:imgData];
+    self.imgData = imgData;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -38,10 +44,8 @@
  */
 
 - (void)viewWillAppear:(BOOL)animated {
-    // ユーザデフォルトの国籍を呼び出して、文字列として出力
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *nationality = [defaults stringForKey:@"nationality"];
-    self.outputNationality.text = nationality;
+    self.outputNationality.text = [defaults stringForKey:@"userNationality"];
 }
 
 
@@ -79,7 +83,6 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
  */
 
 - (IBAction)actionDatePicker:(id)sender {
-    NSLog(@"日付設定のボタンが押されたよ！");
     RMDateSelectionViewController *dateSelectionVC = [RMDateSelectionViewController dateSelectionController];
     dateSelectionVC.delegate = self;
     [dateSelectionVC show];
@@ -111,6 +114,10 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
  */
 
 - (IBAction)insertPost:(id)sender {
+    
+    /**
+     * Parse上のデータベースに保存する
+     */
     PFObject *insertObject = [PFObject objectWithClassName:@"Post"];
     insertObject[@"userName"] = self.inputName.text;
     insertObject[@"nationality"] = self.outputNationality.text;
@@ -134,8 +141,39 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
         }
     }];
     
+    /**
+     * ユーザデフォルトに、選択されたデータ履歴を格納
+     */
+    self.storeObject = [[NSMutableDictionary alloc] init];
+    
+    // 非常に美しくないけどuserDefault用にもうひとつDictionaryをつくる
+    [self.storeObject setObject:self.inputName.text forKey:@"userName"];
+    [self.storeObject setObject:self.outputNationality.text forKey:@"nationality"];
+    [self.storeObject setObject:self.inputTitle.text forKey:@"title"];
+    [self.storeObject setObject:self.inputContents.text forKey:@"contents"];
+    [self.storeObject setObject:self.tmpDate forKey:@"departureTime"];
+    [self.storeObject setObject:self.imgData forKey:@"imageFile"];
+    [self.storeObject setObject:airportId forKey:@"airportId"];
+    
+    // userDefaultに保存するため、NSDataに変換してから格納する
+    NSData *classData = [NSKeyedArchiver archivedDataWithRootObject:self.storeObject];
+    [defaults setObject:classData forKey:@"storePost"];
+    
+    // ユーザー情報の更新
+    [defaults setObject:self.inputName.text forKey:@"userName"];
+    [defaults setObject:self.imgData forKey:@"userImg"];
+    
+    // 保存
+    [defaults synchronize];
+    
     // Post一覧に遷移
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (NSString *)readUserDefaultString:(NSString *)key {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *string = [defaults stringForKey:key];
+    return string;
 }
 
 - (IBAction)cancel:(id)sender {

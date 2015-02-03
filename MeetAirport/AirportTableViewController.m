@@ -40,23 +40,192 @@
     
         if (json_data != nil) {
             NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:json_data options:NSJSONReadingAllowFragments error:nil];
-            self.airportList = jsonObject;
 
+//            NSDictionary *airportLists;
+//            
+//            for (NSMutableDictionary *jsonObject in jsonObjects) {
+//                [self cleanDictionary:jsonObject];
+//            }
+//
+//            
+//            NSMutableDictionary *mutableJsonData = [[NSMutableDictionary alloc] init];
+//            
+            
+            
+//            for (id key in [jsonObject keyEnumerator]) {
+//                NSLog(@"Key:%@ Value:%@", key, [jsonObject valueForKey:key]);
+//            }
+//            
+//            
+//            NSLog(@"みゅーたぶる１%@",mutableJsonData);
+//            [self cleanDictionary:mutableJsonData];
+//            NSLog(@"みゅーたぶる２%@",mutableJsonData);
+            
+
+            
+            self.airportList = jsonObject;
+            
+            // ユーザデフォルトに、選択されたAirportのIDを格納
+//            [defaults setObject:jsonObjects forKey:@"airportLists"];
+            // synchronize: すぐに保存したいときに利用
+//            [defaults synchronize];
+
+
+            // 別の手段でplistに入れてみる
+//            NSString *path = [[NSBundle mainBundle] pathForResource:@"airportList" ofType:@"plist"];
+//            
+//            //Cacheディレクトリ
+//            NSString *cachePath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"airportList.plist"];
+//            
+//            NSFileManager *filemanager = [NSFileManager defaultManager];
+//            if (![filemanager fileExistsAtPath:cachePath]) {
+//                [filemanager copyItemAtPath:path toPath:cachePath error:nil];
+//            }
+//            
+//            //plistファイルの読み込み
+//            NSMutableArray* airportList = [NSMutableArray arrayWithContentsOfFile:cachePath];
+//            
+//            //plistに追記
+//            [airportList addObject:@"sample1"];
+//            
+//            //保存
+//            BOOL result = [airportList writeToFile:cachePath atomically:NO];
+//            if (!result) {
+//                NSLog(@"ファイルの書き込みに失敗");
+//            } else {
+//                NSLog(@"ファイルの書き込みが完了しました");
+//            }
+            
+            
+//            NSArray *array = [NSArray arrayWithObjects:@"tokyo", @"nagoya", @"osaka", nil];
+//            [self saveToPlistWithDictionary:self.airportList];
+//            
+//            [self rwDataToPlist:airportList playerColor: withData:<#(NSArray *)#>]
+            
+            
             // plistに、最新のjson情報を格納
             // ホームディレクトリを取得
-            NSString *homeDir = NSHomeDirectory();
-            // 書き込みたいplistのパスを作成
-            NSString *filePath = [homeDir stringByAppendingPathComponent:@"airportList.plist"];
-            // 書き込み
-            BOOL result = [self.airportList writeToFile:filePath atomically:YES];
-            if (!result) {
-                NSLog(@"ファイルの書き込みに失敗");
-            } else {
-                NSLog(@"ファイルの書き込みが完了しました");
-            }
+//            NSString *homeDir = NSHomeDirectory();
+//            NSLog(@"ほーむでぃれくとり%@",homeDir);
+//            // 書き込みたいplistのパスを作成
+//            NSString *filePath = [homeDir stringByAppendingPathComponent:@"airportList.plist"];
+//            NSLog(@"ふぁいるぱす%@",filePath);
+//            // 書き込み
+//            BOOL result = [self.airportList writeToFile:filePath atomically:YES];
+//            if (!result) {
+//                NSLog(@"ファイルの書き込みに失敗");
+//            } else {
+//                NSLog(@"ファイルの書き込みが完了しました");
+//            }
         }
     }
 }
+
+- (void)cleanDictionary:(NSMutableDictionary *)dictionary {
+    for (id key in [dictionary allKeys]) {
+        if ([dictionary valueForKey:key] == [NSNull null]) {
+            [dictionary setObject:@"" forKey:key];
+        } else if ([[dictionary valueForKey:key] isKindOfClass:[NSDictionary class]]) {
+            [self cleanDictionary:[dictionary valueForKey:key]];
+        }
+    }
+}
+
+
+- (void)saveToPlistWithDictionary:(NSDictionary *)list
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *directory = [paths objectAtIndex:0];
+    NSString *filePath = [directory stringByAppendingPathComponent:@"data.plist"];
+    
+    BOOL successful = [list writeToFile:filePath atomically:NO];
+    
+    if (successful) {
+        NSLog(@"%@", @"データの保存に成功");
+    }
+}
+
+- (void)saveToPlistWithArray:(NSArray *)array
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *directory = [paths objectAtIndex:0];
+    NSString *filePath = [directory stringByAppendingPathComponent:@"data.plist"];
+    
+    BOOL successful = [array writeToFile:filePath atomically:NO];
+    
+    if (successful) {
+        NSLog(@"%@", @"データの保存に成功");
+    }
+}
+
+
+- (void) rwDataToPlist:(NSString *)fileName playerColor:(NSString *)strPlayer withData:(NSArray *)data
+
+{
+    // Step1: Get plist file path
+    
+    NSArray *sysPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory ,NSUserDomainMask, YES);
+    
+    NSString *documentsDirectory = [sysPaths objectAtIndex:0];
+    
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:fileName];
+    
+    NSLog(@"Plist File Path: %@", filePath);
+    
+    // Step2: Define mutable dictionary
+    
+    NSMutableDictionary *plistDict;
+    
+    // Step3: Check if file exists at path and read data from the file if exists
+    
+    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath])
+        
+    {
+        
+        plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile:filePath];
+        
+    }
+    
+    else
+        
+    {
+        
+        // Step4: If doesn't exist, start with an empty dictionary
+        
+        plistDict = [[NSMutableDictionary alloc] init];
+        
+    }
+    
+    NSLog(@"plist data: %@", [plistDict description]);
+    
+    // Step5: Set data in dictionary
+    
+    [plistDict setValue:data forKey: strPlayer];
+    
+    // Step6: Write data from the mutable dictionary to the plist file
+    
+    BOOL didWriteToFile = [plistDict writeToFile:filePath atomically:YES];
+    
+    if (didWriteToFile)
+        
+    {
+        
+        NSLog(@"Write to .plist file is a SUCCESS!");
+        
+    }
+    
+    else
+        
+    {
+        
+        NSLog(@"Write to .plist file is a FAILURE!");
+        
+    }
+    
+}
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
