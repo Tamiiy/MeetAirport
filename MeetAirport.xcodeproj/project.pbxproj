@@ -10,6 +10,7 @@
 		B62DAB2172A87F824A7AA7C7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6839C4AC2D891AAEBCFB2940 /* libPods.a */; };
 		CE0D5F0C1A79D85100A05E47 /* topFemale.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE0D5F0B1A79D85100A05E47 /* topFemale.jpg */; };
 		CE5AE0071A7F15FD00E1937D /* airportList.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE5AE0061A7F15FD00E1937D /* airportList.plist */; };
+		CE5AE00A1A807B2000E1937D /* HistoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5AE0091A807B2000E1937D /* HistoryTableViewController.m */; };
 		CE725D311A6CA4AB00BA2389 /* AddPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE725D301A6CA4AB00BA2389 /* AddPostViewController.m */; };
 		CE725D341A6CB17C00BA2389 /* SelectNationalityTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE725D331A6CB17C00BA2389 /* SelectNationalityTableViewController.m */; };
 		CE9083901A635DBE00E6FC33 /* PostTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE90838F1A635DBE00E6FC33 /* PostTableViewController.m */; };
@@ -45,6 +46,8 @@
 		BB93C2753D283EF30626EAF0 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		CE0D5F0B1A79D85100A05E47 /* topFemale.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = topFemale.jpg; sourceTree = "<group>"; };
 		CE5AE0061A7F15FD00E1937D /* airportList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = airportList.plist; sourceTree = "<group>"; };
+		CE5AE0081A807B2000E1937D /* HistoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryTableViewController.h; sourceTree = "<group>"; };
+		CE5AE0091A807B2000E1937D /* HistoryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryTableViewController.m; sourceTree = "<group>"; };
 		CE725D2F1A6CA4AB00BA2389 /* AddPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddPostViewController.h; sourceTree = "<group>"; };
 		CE725D301A6CA4AB00BA2389 /* AddPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddPostViewController.m; sourceTree = "<group>"; };
 		CE725D321A6CB17C00BA2389 /* SelectNationalityTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectNationalityTableViewController.h; sourceTree = "<group>"; };
@@ -154,10 +157,12 @@
 				CEEB40711A768A54009B14AB /* CommentTableViewCell.m */,
 				CE725D2F1A6CA4AB00BA2389 /* AddPostViewController.h */,
 				CE725D301A6CA4AB00BA2389 /* AddPostViewController.m */,
-				CE725D321A6CB17C00BA2389 /* SelectNationalityTableViewController.h */,
-				CE725D331A6CB17C00BA2389 /* SelectNationalityTableViewController.m */,
 				CEEB40761A772D25009B14AB /* AddCommentViewController.h */,
 				CEEB40771A772D25009B14AB /* AddCommentViewController.m */,
+				CE725D321A6CB17C00BA2389 /* SelectNationalityTableViewController.h */,
+				CE725D331A6CB17C00BA2389 /* SelectNationalityTableViewController.m */,
+				CE5AE0081A807B2000E1937D /* HistoryTableViewController.h */,
+				CE5AE0091A807B2000E1937D /* HistoryTableViewController.m */,
 				CEE0D4FD1A5CD69D009FBBB5 /* Images.xcassets */,
 				CEE0D4FF1A5CD69D009FBBB5 /* LaunchScreen.xib */,
 				CEE0D4F41A5CD69D009FBBB5 /* MeetAirport.xcdatamodeld */,
@@ -333,6 +338,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE5AE00A1A807B2000E1937D /* HistoryTableViewController.m in Sources */,
 				CE725D311A6CA4AB00BA2389 /* AddPostViewController.m in Sources */,
 				CEE0D55A1A5F643C009FBBB5 /* AirportTableViewController.m in Sources */,
 				CE9083901A635DBE00E6FC33 /* PostTableViewController.m in Sources */,

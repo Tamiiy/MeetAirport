@@ -17,7 +17,6 @@
 @property NSData *imgData;
 @property NSMutableDictionary *storeObject;
 
-
 @end
 
 @implementation AddPostViewController
@@ -114,7 +113,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
  */
 
 - (IBAction)insertPost:(id)sender {
-    
+
     /**
      * Parse上のデータベースに保存する
      */

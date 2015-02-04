@@ -10,4 +10,8 @@
 
 @interface AirportTableViewController : UITableViewController
 
+- (IBAction)backBtn:(id)sender;
+
+- (IBAction)reloadBtn:(id)sender;
+
 @end
