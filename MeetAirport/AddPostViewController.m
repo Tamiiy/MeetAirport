@@ -154,8 +154,13 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
     [self.storeObject setObject:self.imgData forKey:@"imageFile"];
     [self.storeObject setObject:airportId forKey:@"airportId"];
     
-    // userDefaultに保存するため、NSDataに変換してから格納する
-    NSData *classData = [NSKeyedArchiver archivedDataWithRootObject:self.storeObject];
+    // userDefaultに保存するため、Arrayに追加・NSDataに変換して格納する
+    NSData *storePostData = [defaults dataForKey:@"storePost"];
+    NSMutableArray *addStorePost = [[NSMutableArray alloc] init];
+    addStorePost = [NSKeyedUnarchiver unarchiveObjectWithData:storePostData];
+    [addStorePost addObject:self.storeObject];
+    
+    NSData *classData = [NSKeyedArchiver archivedDataWithRootObject:addStorePost];
     [defaults setObject:classData forKey:@"storePost"];
     
     // ユーザー情報の更新

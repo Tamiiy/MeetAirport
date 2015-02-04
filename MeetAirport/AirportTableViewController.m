@@ -93,12 +93,10 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"airportListCell"];
     NSInteger row = indexPath.row;
-    
     // 一括でラベルのフォントをAppleSDGothicNeo-Thinのサイズ20.0fに統一する
     cell.textLabel.font = [UIFont fontWithName:@"AppleSDGothicNeo-Thin" size:20.0f];
 
     if (self.connectionError == NO) {
-        
         // AirPort名と国名だけ取り出して一覧表示する
         NSArray* names = (NSArray*)[self.airportList valueForKey:@"name"];
         NSArray* countries = (NSArray*)[self.airportList valueForKey:@"country"];

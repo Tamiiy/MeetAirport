@@ -7,9 +7,11 @@
 //
 
 #import "HistoryTableViewController.h"
+#import "PostTableViewCell.h"
 
 @interface HistoryTableViewController ()
 
+@property NSArray *storePostArray;
 @property NSDictionary *historyPost;
 
 @end
@@ -20,7 +22,7 @@
     [super viewDidLoad];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSData *storePost = [defaults dataForKey:@"storePost"];
-    self.historyPost = [NSKeyedUnarchiver unarchiveObjectWithData:storePost];
+    self.storePostArray = [NSKeyedUnarchiver unarchiveObjectWithData:storePost];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -37,17 +39,16 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 0;
+    return self.storePostArray.count;
 }
 
 
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-//    
-//    // Configure the cell...
-//    
-//    return cell;
-//}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSInteger row = indexPath.row;
+    PostTableViewCell *postCell = [tableView dequeueReusableCellWithIdentifier:@"postCell" forIndexPath:indexPath];
+    [postCell setDataOfParse:self.storePostArray[row]];
+    return postCell;
+}
 
 
 /*
