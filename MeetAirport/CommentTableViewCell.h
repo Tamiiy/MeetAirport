@@ -11,7 +11,8 @@
 @interface CommentTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *userImg;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
-@property (weak, nonatomic) IBOutlet UITextView *contentsTextView;
+@property (weak, nonatomic) IBOutlet UILabel *contentsTextView;
+@property (weak, nonatomic) IBOutlet UILabel *nationality;
 
 - (void)setDataOfComments:(NSDictionary *)dataOfComments;
 

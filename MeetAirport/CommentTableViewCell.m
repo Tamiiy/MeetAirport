@@ -22,18 +22,26 @@
 
 - (void)setDataOfComments:(NSDictionary *)dataOfComments {
     
+    [self initFont];
+    
     //string系の表示
     self.nameLabel.text = dataOfComments[@"userName"];
     self.contentsTextView.text = dataOfComments[@"comment"];
     
     //画像の表示
-    [dataOfComments[@"useImg"] getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+    [dataOfComments[@"userImg"] getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
         if (!error)
         {
             UIImage *image = [UIImage imageWithData:data];
             self.userImg.image = image;
         }
     }];
+}
+
+-(void)initFont {
+    self.nameLabel.font = [UIFont fontWithName:@"AppleSDGothicNeo-Light" size:10.0f];
+    self.contentsTextView.font = [UIFont fontWithName:@"AppleSDGothicNeo-Thin" size:14.0f];
+    self.nationality.font = [UIFont fontWithName:@"AppleSDGothicNeo-Thin" size:9.0f];
 }
 
 

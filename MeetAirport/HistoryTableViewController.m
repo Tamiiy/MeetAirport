@@ -21,8 +21,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSData *storePost = [defaults dataForKey:@"storePost"];
-    self.storePostArray = [NSKeyedUnarchiver unarchiveObjectWithData:storePost];
+    if ([defaults dataForKey:@"storePost"] != nil) {
+        NSData *storePost = [defaults dataForKey:@"storePost"];
+        self.storePostArray = [NSKeyedUnarchiver unarchiveObjectWithData:storePost];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

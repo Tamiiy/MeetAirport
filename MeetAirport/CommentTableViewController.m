@@ -32,6 +32,10 @@
     PFQuery *queryComment = [PFQuery queryWithClassName:@"Comment"];
     [queryComment whereKey:@"postObjectId" equalTo: self.selectedObjectId];
     self.dataOfComment = queryComment.findObjects;
+    
+    // 高さ可変のcellをつくる
+//    self.tableView.estimatedRowHeight = 90;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -83,14 +87,15 @@
     }
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
-        return UITableViewAutomaticDimension;
-    } else {
-        return UITableViewAutomaticDimension;
-
-    }
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    if (indexPath.section == 0) {
+//        return 140;
+//    } else {
+//        return 90;
+////        return UITableViewAutomaticDimension;
+//
+//    }
+//}
 
 -(NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger) section {
     switch(section) {

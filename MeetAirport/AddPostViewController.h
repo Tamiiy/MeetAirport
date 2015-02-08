@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "RMDateSelectionViewController.h"
 
-@interface AddPostViewController : UIViewController <UIActionSheetDelegate> {
+@interface AddPostViewController : UIViewController <UIActionSheetDelegate,UIGestureRecognizerDelegate> {
     UIActionSheet *basicSheet;
 }
 
@@ -27,11 +27,13 @@
 - (IBAction)actionDatePicker:(id)sender;
 @property (weak, nonatomic) IBOutlet UILabel *outputTime;
 
-@property (weak, nonatomic) IBOutlet UITextField *inputContents;
+@property (weak, nonatomic) IBOutlet UITextView *inputContents;
 
 @property (weak, nonatomic) IBOutlet UIButton *sendButton;
 - (IBAction)insertPost:(id)sender;
 
 - (IBAction)cancel:(id)sender;
+
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @end

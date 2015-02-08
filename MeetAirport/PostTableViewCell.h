@@ -15,11 +15,13 @@
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *datetimeLabel;
-@property (weak, nonatomic) IBOutlet UITextView *contentsTextView;
 @property (weak, nonatomic) IBOutlet PFImageView *userImg;
+@property (weak, nonatomic) IBOutlet UILabel *contentsTextView;
+@property (weak, nonatomic) IBOutlet UILabel *nationality;
 
 - (void)setDataIndexPath:(NSIndexPath *)indexPath;
 - (void)setDataOfParse:(NSDictionary *)dataOfParse;
+- (void)initFont;
 
 
 @end

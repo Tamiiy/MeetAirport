@@ -12,7 +12,6 @@
 @implementation PostTableViewCell
 
 - (void)awakeFromNib {
-
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -21,8 +20,10 @@
 }
 
 
-//PostTableViewControllerから渡ってきたデータを表示
+// PostTableViewControllerから渡ってきたデータを表示
 - (void)setDataOfParse:(NSDictionary *)dataOfParse {
+    
+    [self initFont];
     
     //string系の表示
     self.nameLabel.text = dataOfParse[@"userName"];
@@ -42,6 +43,19 @@
             self.userImg.image = image;
         }
     }];
+}
+
+-(void)initFont {
+    self.nameLabel.font = [UIFont fontWithName:@"AppleSDGothicNeo-Light" size:10.0f];
+    self.titleLabel.font = [UIFont fontWithName:@"AppleSDGothicNeo-Light" size:17.0f];
+    self.contentsTextView.font = [UIFont fontWithName:@"AppleSDGothicNeo-Thin" size:14.0f];
+    self.datetimeLabel.font = [UIFont fontWithName:@"AppleSDGothicNeo-Thin" size:12.0f];
+    self.nationality.font = [UIFont fontWithName:@"AppleSDGothicNeo-Thin" size:9.0f];
+    
+    self.nameLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    self.nationality.lineBreakMode = NSLineBreakByWordWrapping;
+    self.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    self.contentsTextView.lineBreakMode = NSLineBreakByWordWrapping;
 }
 
 

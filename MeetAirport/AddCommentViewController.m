@@ -10,13 +10,16 @@
 #import "SelectNationalityTableViewController.h"
 #import "CommentTableViewController.h"
 
-@interface AddCommentViewController ()
+@interface AddCommentViewController () <UITextViewDelegate, UIGestureRecognizerDelegate>
 
 @property NSData *imgData;
+@property BOOL activeView;
 
 @end
 
 @implementation AddCommentViewController
+
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -26,13 +29,17 @@
     NSData *imgData = [defaults dataForKey:@"userImg"];
     self.userImage.image = [[UIImage alloc] initWithData:imgData];
     self.imgData = imgData;
+    
+    self.scrollView.contentSize = CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height * 2);
+    
+    self.inputContents.delegate = self;
+    [self setTapGesture];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 
 /**
@@ -104,16 +111,36 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 }
 
 
-/*
-#pragma mark - Navigation
+/**
+ * 画面のどこかをタップしたら、キーボードが引っ込むようにする
+ */
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)setTapGesture{
+    // シングルタップ
+    UITapGestureRecognizer *tapGesture =
+    [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapped:)];
+    // デリゲートをセット
+    tapGesture.delegate = self;
+    // view に追加
+    [self.view addGestureRecognizer:tapGesture];
 }
-*/
+// 画面のどこかをシングルタップしたら、キーボードを閉じる
+- (void)tapped:(UITapGestureRecognizer *)sender{
+    [self.view endEditing:YES];
+}
 
+/**
+ * キーボードを出現させたときに画面を動かす処理
+ */
+- (void)textViewDidBeginEditing:(UITextView *)textView{
+    CGPoint scrollPoint = CGPointMake(0.0,200.0);
+    [self.scrollView setContentOffset:scrollPoint animated:YES];
+}
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    [self.scrollView setContentOffset:CGPointZero animated:YES];
+}
+
+// cancelボタンの処理
 - (IBAction)cancel:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }

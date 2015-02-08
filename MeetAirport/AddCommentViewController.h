@@ -19,8 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *userImage;
 - (IBAction)changePhoto:(id)sender;
 
-
-@property (weak, nonatomic) IBOutlet UITextField *inputContents;
+@property (weak, nonatomic) IBOutlet UITextView *inputContents;
 
 @property (weak, nonatomic) IBOutlet UIButton *sendButton;
 - (IBAction)insertPost:(id)sender;
@@ -29,6 +28,8 @@
 
 
 - (IBAction)cancel:(id)sender;
+
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 
 
 @end

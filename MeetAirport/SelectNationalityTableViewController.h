@@ -12,4 +12,6 @@
 
 @property (nonatomic) NSString *selectedCountry;
 
+- (IBAction)cancel:(id)sender;
+
 @end

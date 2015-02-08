@@ -11,11 +11,12 @@
 #import "SelectNationalityTableViewController.h"
 #import <Parse/Parse.h>
 
-@interface AddPostViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, RMDateSelectionViewControllerDelegate>
+@interface AddPostViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, RMDateSelectionViewControllerDelegate, UITextViewDelegate>
 
 @property NSDate *tmpDate;
 @property NSData *imgData;
 @property NSMutableDictionary *storeObject;
+@property UIScrollView *myScrollView;
 
 @end
 
@@ -24,13 +25,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     // ユーザデフォルトのユーザ情報を呼び出して、初期値として出力(if文の分岐いらんのか?)
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    self.inputName.text = [defaults stringForKey:@"userName"];
-    NSData *imgData = [defaults dataForKey:@"userImg"];
-    self.userImage.image = [[UIImage alloc] initWithData:imgData];
-    self.imgData = imgData;
+    if ([defaults stringForKey:@"userName"] != nil) {
+        self.inputName.text = [defaults stringForKey:@"userName"];
+        NSData *imgData = [defaults dataForKey:@"userImg"];
+        self.userImage.image = [[UIImage alloc] initWithData:imgData];
+        self.imgData = imgData;
+    }
+    
+    self.inputContents.delegate = self;
+    [self setTapGesture];
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -174,6 +182,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+
 - (NSString *)readUserDefaultString:(NSString *)key {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *string = [defaults stringForKey:key];
@@ -183,6 +192,39 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 - (IBAction)cancel:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+
+/**
+ * 画面のどこかをタップしたら、キーボードが引っ込むようにする
+ */
+
+- (void)setTapGesture{
+    // シングルタップ
+    UITapGestureRecognizer *tapGesture =
+    [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapped:)];
+    // デリゲートをセット
+    tapGesture.delegate = self;
+    // view に追加
+    [self.view addGestureRecognizer:tapGesture];
+}
+- (void)tapped:(UITapGestureRecognizer *)sender{
+    // 画面のどこかをシングルタップしたら、キーボードを閉じる
+    [self.view endEditing:YES];
+}
+
+
+/**
+ * キーボードを出現させたときに画面を動かす処理
+ */
+
+- (void)textViewDidBeginEditing:(UITextView *)textView{
+    CGPoint scrollPoint = CGPointMake(0.0,200.0);
+    [self.scrollView setContentOffset:scrollPoint animated:YES];
+}
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    [self.scrollView setContentOffset:CGPointZero animated:YES];
+}
+
 
 
 @end
