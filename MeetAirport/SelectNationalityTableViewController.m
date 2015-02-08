@@ -19,25 +19,37 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // ユーザデフォルトのデータを呼び出す
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    // キャッシュがあれば、UserDefaultのデータを入れて終了
+    if ([defaults dataForKey:@"countriesName"] != nil) {
+        self.countries = [NSKeyedUnarchiver unarchiveObjectWithData:[defaults dataForKey:@"countriesName"]];
+        
+    // なければ、jsonからデータを取得する
+    } else {
 
-    NSURL *url = [NSURL URLWithString:@"https://raw.githubusercontent.com/umpirsky/country-list/master/country/cldr/en/country.json"];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    NSData *json_data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-    NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:json_data options:NSJSONReadingAllowFragments error:nil];
+        NSURL *url = [NSURL URLWithString:@"https://raw.githubusercontent.com/umpirsky/country-list/master/country/cldr/en/country.json"];
+        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+        NSData *json_data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+        NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:json_data options:NSJSONReadingAllowFragments error:nil];
     
-    NSInteger count = 0;
-    NSMutableArray *countriesName = [NSMutableArray array];
+        NSInteger count = 0;
+        NSMutableArray *countriesName = [NSMutableArray array];
     
-    for (id key in [jsonObject allKeys]) {
-        NSLog(@"%@,%@", key, [jsonObject valueForKey:key]);
-        [countriesName addObject:[jsonObject valueForKey:key]];
-        count ++;
+        for (id key in [jsonObject allKeys]) {
+            [countriesName addObject:[jsonObject valueForKey:key]];
+            count ++;
+        }
+        self.countries = countriesName;
+        
+        // userDefaultにキャッシュとして保存
+        NSData *classData = [NSKeyedArchiver archivedDataWithRootObject:countriesName];
+        [defaults setObject:classData forKey:@"countriesName"];
+        [defaults synchronize];
     }
-    self.countries = countriesName;
-
-   
-    // 国表示のテストのための配列
-//    self.countries = [NSArray arrayWithObjects:@"Japan", @"Philippines", @"Korea", @"Thai", @"America", @"Brazil", nil];
+    
 }
 
 - (void)didReceiveMemoryWarning {

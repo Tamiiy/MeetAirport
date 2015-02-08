@@ -218,7 +218,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
  */
 
 - (void)textViewDidBeginEditing:(UITextView *)textView{
-    CGPoint scrollPoint = CGPointMake(0.0,200.0);
+    CGPoint scrollPoint = CGPointMake(0.0,300.0);
     [self.scrollView setContentOffset:scrollPoint animated:YES];
 }
 - (void)textViewDidEndEditing:(UITextView *)textView {
