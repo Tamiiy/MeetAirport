@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "SVProgressHUD.h"
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *whereLabel;
@@ -29,4 +30,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    [SVProgressHUD show];
+}
+
+
+// userDefaultを初期化する
+- (IBAction)defaultClear:(id)sender {
+    NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+    [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+}
 @end

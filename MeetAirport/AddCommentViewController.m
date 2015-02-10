@@ -9,11 +9,11 @@
 #import "AddCommentViewController.h"
 #import "SelectNationalityTableViewController.h"
 #import "CommentTableViewController.h"
+#import "SVProgressHUD.h"
 
 @interface AddCommentViewController () <UITextViewDelegate, UIGestureRecognizerDelegate>
 
 @property NSData *imgData;
-@property BOOL activeView;
 
 @end
 
@@ -50,6 +50,7 @@
     // ユーザデフォルトの国籍を呼び出して、文字列として出力
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     self.outputNationality.text = [defaults stringForKey:@"userNationality"];
+    
 }
 
 
@@ -97,15 +98,16 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
     
     [insertObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error) {
-            NSLog(@"Save成功");
+            [SVProgressHUD showSuccessWithStatus:@"Save Success!"];
             CommentTableViewController *commentTableViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"commentView"];
             [commentTableViewController reload];
         }
         else{
             NSLog(@"Error: %@ %@", error, [error userInfo]);
+            [SVProgressHUD showErrorWithStatus:@"Save Faild.."];
         }
     }];
-    
+
     // Comment一覧に遷移
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -132,12 +134,19 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 /**
  * キーボードを出現させたときに画面を動かす処理
  */
+
 - (void)textViewDidBeginEditing:(UITextView *)textView{
     CGPoint scrollPoint = CGPointMake(0.0,200.0);
     [self.scrollView setContentOffset:scrollPoint animated:YES];
 }
 - (void)textViewDidEndEditing:(UITextView *)textView {
     [self.scrollView setContentOffset:CGPointZero animated:YES];
+}
+
+
+// Nationalityを選択したときのローディング表示
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    [SVProgressHUD show];
 }
 
 // cancelボタンの処理

@@ -14,4 +14,6 @@
 
 - (IBAction)reloadBtn:(id)sender;
 
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+
 @end

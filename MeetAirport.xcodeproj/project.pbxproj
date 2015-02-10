@@ -20,6 +20,11 @@
 		CE2092E61A83D6F40044F0EC /* arrow645.png in Resources */ = {isa = PBXBuildFile; fileRef = CE2092E51A83D6F40044F0EC /* arrow645.png */; };
 		CE2092E81A83D7830044F0EC /* conversation6.png in Resources */ = {isa = PBXBuildFile; fileRef = CE2092E71A83D7830044F0EC /* conversation6.png */; };
 		CE2092EA1A84524C0044F0EC /* pin28.png in Resources */ = {isa = PBXBuildFile; fileRef = CE2092E91A84524C0044F0EC /* pin28.png */; };
+		CE235C2B1A87B427002BA219 /* Post.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE235C291A87B427002BA219 /* Post.xcdatamodeld */; };
+		CE235C311A87CA09002BA219 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE235C301A87CA09002BA219 /* QuartzCore.framework */; };
+		CE235C351A87CE96002BA219 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CE235C321A87CE96002BA219 /* SVProgressHUD.bundle */; };
+		CE235C361A87CE96002BA219 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = CE235C341A87CE96002BA219 /* SVProgressHUD.m */; };
+		CE235C3A1A87CEE7002BA219 /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE235C381A87CEE7002BA219 /* SVIndefiniteAnimatedView.m */; };
 		CE5AE0071A7F15FD00E1937D /* airportList.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE5AE0061A7F15FD00E1937D /* airportList.plist */; };
 		CE5AE00A1A807B2000E1937D /* HistoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5AE0091A807B2000E1937D /* HistoryTableViewController.m */; };
 		CE725D311A6CA4AB00BA2389 /* AddPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE725D301A6CA4AB00BA2389 /* AddPostViewController.m */; };
@@ -67,6 +72,14 @@
 		CE2092E51A83D6F40044F0EC /* arrow645.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow645.png; sourceTree = "<group>"; };
 		CE2092E71A83D7830044F0EC /* conversation6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = conversation6.png; sourceTree = "<group>"; };
 		CE2092E91A84524C0044F0EC /* pin28.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pin28.png; sourceTree = "<group>"; };
+		CE235C2A1A87B427002BA219 /* Post.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Post.xcdatamodel; sourceTree = "<group>"; };
+		CE235C301A87CA09002BA219 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		CE235C321A87CE96002BA219 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		CE235C331A87CE96002BA219 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		CE235C341A87CE96002BA219 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
+		CE235C371A87CEE7002BA219 /* SVIndefiniteAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVIndefiniteAnimatedView.h; sourceTree = "<group>"; };
+		CE235C381A87CEE7002BA219 /* SVIndefiniteAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVIndefiniteAnimatedView.m; sourceTree = "<group>"; };
+		CE235C391A87CEE7002BA219 /* SVProgressHUD-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
 		CE5AE0061A7F15FD00E1937D /* airportList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = airportList.plist; sourceTree = "<group>"; };
 		CE5AE0081A807B2000E1937D /* HistoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryTableViewController.h; sourceTree = "<group>"; };
 		CE5AE0091A807B2000E1937D /* HistoryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryTableViewController.m; sourceTree = "<group>"; };
@@ -108,6 +121,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE235C311A87CA09002BA219 /* QuartzCore.framework in Frameworks */,
 				B62DAB2172A87F824A7AA7C7 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -125,6 +139,7 @@
 		58132F8F7A69C1481B3CE9A5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CE235C301A87CA09002BA219 /* QuartzCore.framework */,
 				6839C4AC2D891AAEBCFB2940 /* libPods.a */,
 			);
 			name = Frameworks;
@@ -187,8 +202,14 @@
 				CE5AE0091A807B2000E1937D /* HistoryTableViewController.m */,
 				CEE0D4FD1A5CD69D009FBBB5 /* Images.xcassets */,
 				CEE0D4FF1A5CD69D009FBBB5 /* LaunchScreen.xib */,
-				CEE0D4F41A5CD69D009FBBB5 /* MeetAirport.xcdatamodeld */,
 				CEE0D4ED1A5CD69D009FBBB5 /* Supporting Files */,
+				CEE0D4F41A5CD69D009FBBB5 /* MeetAirport.xcdatamodeld */,
+				CE235C371A87CEE7002BA219 /* SVIndefiniteAnimatedView.h */,
+				CE235C381A87CEE7002BA219 /* SVIndefiniteAnimatedView.m */,
+				CE235C391A87CEE7002BA219 /* SVProgressHUD-Prefix.pch */,
+				CE235C321A87CE96002BA219 /* SVProgressHUD.bundle */,
+				CE235C331A87CE96002BA219 /* SVProgressHUD.h */,
+				CE235C341A87CE96002BA219 /* SVProgressHUD.m */,
 			);
 			path = MeetAirport;
 			sourceTree = "<group>";
@@ -212,6 +233,7 @@
 				CEE0D4EE1A5CD69D009FBBB5 /* Info.plist */,
 				CEE0D4EF1A5CD69D009FBBB5 /* main.m */,
 				CE5AE0061A7F15FD00E1937D /* airportList.plist */,
+				CE235C291A87B427002BA219 /* Post.xcdatamodeld */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -325,6 +347,7 @@
 				CE5AE0071A7F15FD00E1937D /* airportList.plist in Resources */,
 				CE2092DE1A8377570044F0EC /* close15_16px.png in Resources */,
 				CEE0D5011A5CD69D009FBBB5 /* LaunchScreen.xib in Resources */,
+				CE235C351A87CE96002BA219 /* SVProgressHUD.bundle in Resources */,
 				CE2092D41A8361A30044F0EC /* user82.png in Resources */,
 				CEE0D4FE1A5CD69D009FBBB5 /* Images.xcassets in Resources */,
 				CE2092E61A83D6F40044F0EC /* arrow645.png in Resources */,
@@ -384,6 +407,7 @@
 			files = (
 				CE5AE00A1A807B2000E1937D /* HistoryTableViewController.m in Sources */,
 				CE725D311A6CA4AB00BA2389 /* AddPostViewController.m in Sources */,
+				CE235C361A87CE96002BA219 /* SVProgressHUD.m in Sources */,
 				CEE0D55A1A5F643C009FBBB5 /* AirportTableViewController.m in Sources */,
 				CE9083901A635DBE00E6FC33 /* PostTableViewController.m in Sources */,
 				CEE0D55D1A62B0E8009FBBB5 /* PostTableViewCell.m in Sources */,
@@ -392,9 +416,11 @@
 				CEEB406F1A75E628009B14AB /* CommentTableViewController.m in Sources */,
 				CEEB40721A768A54009B14AB /* CommentTableViewCell.m in Sources */,
 				CEE0D4F01A5CD69D009FBBB5 /* main.m in Sources */,
+				CE235C3A1A87CEE7002BA219 /* SVIndefiniteAnimatedView.m in Sources */,
 				CE725D341A6CB17C00BA2389 /* SelectNationalityTableViewController.m in Sources */,
 				CEE0D4F91A5CD69D009FBBB5 /* ViewController.m in Sources */,
 				CEE0D4F61A5CD69D009FBBB5 /* MeetAirport.xcdatamodeld in Sources */,
+				CE235C2B1A87B427002BA219 /* Post.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -527,7 +553,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = MeetAirport/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -548,7 +574,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = MeetAirport/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -621,6 +647,16 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
+		CE235C291A87B427002BA219 /* Post.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				CE235C2A1A87B427002BA219 /* Post.xcdatamodel */,
+			);
+			currentVersion = CE235C2A1A87B427002BA219 /* Post.xcdatamodel */;
+			path = Post.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
 		CEE0D4F41A5CD69D009FBBB5 /* MeetAirport.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (

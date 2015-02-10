@@ -9,6 +9,8 @@
 #import "PostTableViewController.h"
 #import "PostTableViewCell.h"
 #import "CommentTableViewController.h"
+#import "SVProgressHUD.h"
+
 
 @interface PostTableViewController ()
 @property (nonatomic, retain) NSMutableDictionary *sections;
@@ -20,17 +22,27 @@
 @implementation PostTableViewController
 
 
-- (void)viewDidLoad {
+- (void)viewDidLoad {    
     [super viewDidLoad];
+    [SVProgressHUD show];
+    
     PFQuery *query = [PFQuery queryWithClassName:@"Post"];
     
-    // ユーザデフォルトのAirportのIDを呼び出す
+    // ユーザデフォルトのAirportのIDと空港名を呼び出す
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     self.airportId = [defaults stringForKey:@"airportId"];
+    
+    // タイトルに空港名をセット
+    self.navigationItem.title = [defaults stringForKey:@"airportName"];;
     
     // AirportIdと一致するデータをfindする
     [query whereKey:@"airportId" equalTo: self.airportId];
     self.dataOfParse = query.findObjects;
+    
+    [SVProgressHUD showSuccessWithStatus:@"Loading Success!"];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
 }
 
 
@@ -62,6 +74,7 @@
 }
 
 -(void)tableView:(UITableView *)tv didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [SVProgressHUD show];
     NSInteger selectedRow = indexPath.row;
     
     CommentTableViewController *commentView = [self.storyboard instantiateViewControllerWithIdentifier:@"commentView"];
@@ -71,6 +84,8 @@
 
     [self.navigationController pushViewController:commentView animated:YES];
 }
+
+
 
 /*
 // Override to support conditional editing of the table view.

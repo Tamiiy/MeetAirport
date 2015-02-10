@@ -30,6 +30,9 @@ NSLog(@"%f", self.window.frame.size.width);
     // [Optional] Track statistics around application opens.
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
+    //Register Sync Class
+//    [[SyncEngine sharedEngine] registerNSManagedObjectClassToSync:[Post class]];
+    
     // 一括でラベルのフォントをAppleSDGothicNeo-Thinのサイズ18.0fに統一する
     [[UILabel appearance] setFont:[UIFont fontWithName:@"AppleSDGothicNeo-Thin" size:18.0f]];
     

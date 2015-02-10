@@ -8,11 +8,17 @@
 
 #import "AirportTableViewController.h"
 #import "PostTableViewController.h"
+#import "SVProgressHUD.h"
 
 @interface AirportTableViewController ()
 
 @property NSDictionary *airportList;
+@property NSArray *airportNames;
+@property NSArray *airportCountries;
+@property NSArray *airportIds;
 @property BOOL connectionError;
+@property (nonatomic, strong) NSArray *searchResults;
+
 
 @end
 
@@ -34,13 +40,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // Delegateメソッドを使う
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    
     // ユーザデフォルトのAirportのデータを呼び出す
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     // キャッシュがあれば、UserDefaultのデータを入れて終了
     if ([defaults dataForKey:@"airportList"] != nil) {
         self.airportList = [NSKeyedUnarchiver unarchiveObjectWithData:[defaults dataForKey:@"airportList"]];
+        self.airportNames = (NSArray*)[self.airportList valueForKey:@"name"];
+        self.airportCountries = (NSArray*)[self.airportList valueForKey:@"country"];
+        self.airportIds = (NSArray*)[self.airportList valueForKey:@"code"];
         
+        [SVProgressHUD dismiss];
     // なければ、jsonからデータを取得する
     } else {
         // Airport一覧のデータを取得して、辞書型airportListに代入
@@ -56,11 +70,15 @@
             NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:json_data options:NSJSONReadingAllowFragments error:nil];
 
             self.airportList = jsonObject;
+            self.airportNames = (NSArray*)[self.airportList valueForKey:@"name"];
+            self.airportCountries = (NSArray*)[self.airportList valueForKey:@"country"];
+            self.airportIds = (NSArray*)[self.airportList valueForKey:@"code"];
             
             // userDefaultにキャッシュとして保存
             NSData *classData = [NSKeyedArchiver archivedDataWithRootObject:jsonObject];
             [defaults setObject:classData forKey:@"airportList"];
             [defaults synchronize];
+            [SVProgressHUD dismiss];
             
         // データが取得できなかった場合(ネット通信がBADな場合)
         } else {
@@ -83,8 +101,12 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (self.connectionError == NO) {
-        NSInteger airportCount = self.airportList.count;
-        return airportCount;
+        if (tableView == self.searchDisplayController.searchResultsTableView) {
+            return self.searchResults.count;
+        } else {
+            NSInteger airportCount = self.airportList.count;
+            return airportCount;
+        }
     } else {
         return 1;
     }
@@ -97,18 +119,18 @@
     cell.textLabel.font = [UIFont fontWithName:@"AppleSDGothicNeo-Thin" size:20.0f];
 
     if (self.connectionError == NO) {
-        // AirPort名と国名だけ取り出して一覧表示する
-        NSArray* names = (NSArray*)[self.airportList valueForKey:@"name"];
-        NSArray* countries = (NSArray*)[self.airportList valueForKey:@"country"];
-    
-        NSString *nameData = names[row];
-        NSString *countryData = countries[row];
-    
-        cell.textLabel.text = nameData;
-        cell.detailTextLabel.text = countryData;
-    
-        return cell;
-        
+        if (tableView == self.searchDisplayController.searchResultsTableView) {
+            NSString *nameData = self.searchResults[row];
+            cell.textLabel.text = nameData;
+            return cell;
+        } else {
+            // AirPort名と国名だけ取り出して一覧表示する
+            NSString *nameData = self.airportNames[row];
+            NSString *countryData = self.airportCountries[row];\
+            cell.textLabel.text = nameData;
+            cell.detailTextLabel.text = countryData;
+            return cell;
+        }
     } else {
         cell.textLabel.text = @"connection Error";
         return cell;
@@ -128,11 +150,10 @@
     NSInteger selectedRow = indexPath.row;
     
     if (self.connectionError == NO) {
-        NSArray *airportId = (NSArray*)[self.airportList valueForKey:@"code"];
-    
         //ユーザデフォルトに、選択されたAirportのIDを格納
         NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-        [defaults setObject: airportId[selectedRow] forKey:@"airportId"];
+        [defaults setObject: self.airportIds[selectedRow] forKey:@"airportId"];
+        [defaults setObject: self.airportNames[selectedRow] forKey:@"airportName"];
         [defaults synchronize];
     
         PostTableViewController *postListNavi = [self.storyboard instantiateViewControllerWithIdentifier:@"postTableViewController"];
@@ -192,4 +213,29 @@
 - (IBAction)reloadBtn:(id)sender {
     [self.tableView reloadData];
 }
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    [SVProgressHUD show];
+}
+
+
+/**
+ * 検索機能の実装
+ * 【保留】本当は名前だけじゃなくて、辞書型で検索をかけれるようにしたい
+ */
+
+- (void)filterContainsWithSearchText:(NSString *)searchText {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF contains[c] %@", searchText];
+    self.searchResults = [self.airportList[@"name"] filteredArrayUsingPredicate:predicate];
+}
+- (BOOL)searchDisplayController:controller shouldReloadTableForSearchString:(NSString *)searchString
+{
+    // 検索バーに入力された文字列を引数に、絞り込みをかけます
+    [self filterContainsWithSearchText:searchString];
+    
+    // YESを返すとテーブルビューがリロードされます。
+    // リロードすることでdataSourceSearchResultsiPhoneとdataSourceSearchResultsAndroidからテーブルビューを表示します
+    return YES;
+}
+
 @end

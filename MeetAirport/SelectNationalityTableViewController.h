@@ -14,4 +14,6 @@
 
 - (IBAction)cancel:(id)sender;
 
+@property (strong, nonatomic) IBOutlet UITableView *searchBar;
+
 @end

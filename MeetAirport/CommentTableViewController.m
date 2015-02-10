@@ -10,6 +10,7 @@
 #import "PostTableViewCell.h"
 #import "CommentTableViewCell.h"
 #import "AddCommentViewController.h"
+#import "SVProgressHUD.h"
 
 @interface CommentTableViewController ()
 
@@ -32,14 +33,17 @@
     PFQuery *queryComment = [PFQuery queryWithClassName:@"Comment"];
     [queryComment whereKey:@"postObjectId" equalTo: self.selectedObjectId];
     self.dataOfComment = queryComment.findObjects;
-    
-    // 高さ可変のcellをつくる
-//    self.tableView.estimatedRowHeight = 90;
-    self.tableView.rowHeight = UITableViewAutomaticDimension;
+//    [SVProgressHUD showSuccessWithStatus:@"Loading Success!"];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    // 高さ可変のcellをつくる
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    [self.tableView reloadData];
+    
     // INSERT後に、即時反映するための処理をかく(あとで)
+
+    [SVProgressHUD dismiss];
 }
 
 - (void)reload {
@@ -89,10 +93,10 @@
 
 //- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 //    if (indexPath.section == 0) {
-//        return 140;
+//
 //    } else {
-//        return 90;
-////        return UITableViewAutomaticDimension;
+////        return 90;
+//        return UITableViewAutomaticDimension;
 //
 //    }
 //}

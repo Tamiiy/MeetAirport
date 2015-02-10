@@ -23,7 +23,13 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if ([defaults dataForKey:@"storePost"] != nil) {
         NSData *storePost = [defaults dataForKey:@"storePost"];
-        self.storePostArray = [NSKeyedUnarchiver unarchiveObjectWithData:storePost];
+    NSLog(@"すとあぽすと%@",storePost);
+        NSMutableArray *storePostMutableArray = [[NSMutableArray alloc]init];
+        storePostMutableArray = [NSKeyedUnarchiver unarchiveObjectWithData:storePost];
+        NSDictionary *storePostDictionary;
+        storePostDictionary = [NSKeyedUnarchiver unarchiveObjectWithData:storePost];
+        
+    NSLog(@"すとあぽすとでぃく%@",storePostDictionary);
     }
 }
 

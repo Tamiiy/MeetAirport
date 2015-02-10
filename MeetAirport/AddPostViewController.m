@@ -10,6 +10,7 @@
 #import "PostTableViewController.h"
 #import "SelectNationalityTableViewController.h"
 #import <Parse/Parse.h>
+#import "SVProgressHUD.h"
 
 @interface AddPostViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, RMDateSelectionViewControllerDelegate, UITextViewDelegate>
 
@@ -34,6 +35,8 @@
         self.userImage.image = [[UIImage alloc] initWithData:imgData];
         self.imgData = imgData;
     }
+    
+    self.scrollView.contentSize = CGSizeMake(self.view.bounds.size.width, 1200);
     
     self.inputContents.delegate = self;
     [self setTapGesture];
@@ -62,6 +65,7 @@
 
 // カメラロールの起動と画像選択処理
 - (IBAction)changePhoto:(id)sender {
+    [SVProgressHUD show];
     UIImagePickerControllerSourceType sourceType
     = UIImagePickerControllerSourceTypePhotoLibrary;
     if ([UIImagePickerController isSourceTypeAvailable:sourceType]) {
@@ -69,6 +73,7 @@
         picker.sourceType = sourceType;
         picker.delegate = self;
         [self presentViewController:picker animated:YES completion:NULL];
+        [SVProgressHUD dismiss];
     }
 }
 // 画像選択後にUIimageViewに表示させる
@@ -121,6 +126,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
  */
 
 - (IBAction)insertPost:(id)sender {
+    [SVProgressHUD show];
 
     /**
      * Parse上のデータベースに保存する
@@ -142,9 +148,11 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
     [insertObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error) {
             NSLog(@"Save成功");
+            [SVProgressHUD showSuccessWithStatus:@"Save Success!"];
         }
         else{
             NSLog(@"Error: %@ %@", error, [error userInfo]);
+            [SVProgressHUD showErrorWithStatus:@"Save Faild.."];
         }
     }];
     
@@ -162,24 +170,56 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
     [self.storeObject setObject:self.imgData forKey:@"imageFile"];
     [self.storeObject setObject:airportId forKey:@"airportId"];
     
-    // userDefaultに保存するため、Arrayに追加・NSDataに変換して格納する
-    NSData *storePostData = [defaults dataForKey:@"storePost"];
-    NSMutableArray *addStorePost = [[NSMutableArray alloc] init];
-    addStorePost = [NSKeyedUnarchiver unarchiveObjectWithData:storePostData];
-    [addStorePost addObject:self.storeObject];
+    /**
+     * userDefaultに保存するため、Arrayに追加・NSDataに変換して格納する
+     */
     
-    NSData *classData = [NSKeyedArchiver archivedDataWithRootObject:addStorePost];
-    [defaults setObject:classData forKey:@"storePost"];
+    // NSDataを使わない
+//    if(![defaults dataForKey:@"storePostArray"]) {
+//        NSMutableArray *addStorePost = [[NSMutableArray alloc] init];
+//        [addStorePost addObject:self.storeObject];
+//        NSLog(@"あっどすとあぽすと%@",addStorePost);
+//        [defaults setObject:addStorePost forKey:@"storePostArray"];
+//    } else {
+//        [[defaults arrayForKey:key] mutableCopy]
+//    }
     
-    // ユーザー情報の更新
-    [defaults setObject:self.inputName.text forKey:@"userName"];
-    [defaults setObject:self.imgData forKey:@"userImg"];
+    
+    
+    
+    // userDefault元々入っていたデータを一度呼び出す
+    if(![defaults dataForKey:@"storePost"]) {
+        NSLog(@"でーたがないよ");
+    } else {
+        NSLog(@"でーたがあるよ");
+    }
+//    NSData *storePostData = [defaults dataForKey:@"storePost"];
+//NSLog(@"すとあぽすとでーた２%@",storePostData);
+//NSLog(@"かいとうご１%@",[NSKeyedUnarchiver unarchiveObjectWithData:storePostData]);
+//    NSMutableArray *addStorePost = [[NSMutableArray alloc] init];
+//    addStorePost = [NSKeyedUnarchiver unarchiveObjectWithData:storePostData];
+//    
+//NSLog(@"あっどすとあでーた１%@",addStorePost);
+//    // 呼び出したMutableArrayに新しいデータを追加する
+//    [addStorePost addObject:self.storeObject];
+//NSLog(@"すとあおぶじぇくと%@",self.storeObject);
+//NSLog(@"あっどすとあでーた２%@",addStorePost);
+//    // 新しいデータが入っているArrayを、もう一度NSDataに変換する
+//    NSData *classData = [NSKeyedArchiver archivedDataWithRootObject:addStorePost];
+//NSLog(@"くらすでーた%@",classData);
+//    // userDefaultにセット
+//    [defaults setObject:classData forKey:@"storePost"];
+//    
+//    // ユーザー情報の更新
+//    [defaults setObject:self.inputName.text forKey:@"userName"];
+//    [defaults setObject:self.imgData forKey:@"userImg"];
     
     // 保存
     [defaults synchronize];
     
     // Post一覧に遷移
     [self dismissViewControllerAnimated:YES completion:nil];
+    [SVProgressHUD dismiss];
 }
 
 
@@ -226,5 +266,9 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 }
 
 
+// Nationalityを選択したときのローディング表示
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    [SVProgressHUD show];
+}
 
 @end
