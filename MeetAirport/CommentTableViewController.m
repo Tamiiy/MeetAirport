@@ -26,14 +26,36 @@
     // objectIdと一致するPostをfindする(1データ) / 1データ用のfindメソッドありそう・・
     PFQuery *queryPost = [PFQuery queryWithClassName:@"Post"];
     [queryPost whereKey:@"objectId" equalTo: self.selectedObjectId];
-    NSArray *postObject = queryPost.findObjects;
-    self.dataOfPost = postObject[0];
+    
+    [SVProgressHUD show];
+    [queryPost findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if(!error){
+            self.dataOfPost = objects[0];
+            if (self.dataOfComment != nil) {
+                [self.tableView reloadData];
+                [SVProgressHUD showSuccessWithStatus:@"Loading Success!"];
+            }
+        } else {
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+            [SVProgressHUD showErrorWithStatus:@"load faild.."];
+        }
+    }];
     
     // postObjectIdと一致するCommentをfindする(複数データ)
     PFQuery *queryComment = [PFQuery queryWithClassName:@"Comment"];
     [queryComment whereKey:@"postObjectId" equalTo: self.selectedObjectId];
-    self.dataOfComment = queryComment.findObjects;
-//    [SVProgressHUD showSuccessWithStatus:@"Loading Success!"];
+    [queryComment findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if(!error){
+            self.dataOfComment = objects[0];
+            if (self.dataOfPost != nil) {
+                [self.tableView reloadData];
+                [SVProgressHUD showSuccessWithStatus:@"Loading Success!"];
+            }
+        } else {
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+            [SVProgressHUD showErrorWithStatus:@"load faild.."];
+        }
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

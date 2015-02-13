@@ -8,10 +8,13 @@
 
 #import "HistoryTableViewController.h"
 #import "PostTableViewCell.h"
+#import "CommentTableViewController.h"
+#import "SVProgressHUD.h"
 
 @interface HistoryTableViewController ()
 
-@property NSArray *storePostArray;
+@property NSMutableArray *storePostArray;
+@property NSArray *myObjectIdArray;
 @property NSDictionary *historyPost;
 
 @end
@@ -20,17 +23,26 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [SVProgressHUD show];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if ([defaults dataForKey:@"storePost"] != nil) {
-        NSData *storePost = [defaults dataForKey:@"storePost"];
-    NSLog(@"すとあぽすと%@",storePost);
-        NSMutableArray *storePostMutableArray = [[NSMutableArray alloc]init];
-        storePostMutableArray = [NSKeyedUnarchiver unarchiveObjectWithData:storePost];
-        NSDictionary *storePostDictionary;
-        storePostDictionary = [NSKeyedUnarchiver unarchiveObjectWithData:storePost];
-        
-    NSLog(@"すとあぽすとでぃく%@",storePostDictionary);
+    if([defaults arrayForKey:@"myObjectIdArray"] != nil) {
+        NSArray *tmpMyObjectIdArray = [[defaults arrayForKey:@"myObjectIdArray"] mutableCopy];
+        self.myObjectIdArray = [[tmpMyObjectIdArray reverseObjectEnumerator]allObjects];
+        PFQuery *query = [PFQuery queryWithClassName:@"Post"];
+        self.storePostArray = [[NSMutableArray alloc]init];
+        for(NSString *objectId in self.myObjectIdArray){
+            [query whereKey:@"objectId" equalTo:objectId];
+            NSArray *postObject = query.findObjects;
+            NSDictionary *tmpPost = postObject[0];
+            [self.storePostArray addObject:tmpPost];
+        }
+        [SVProgressHUD dismiss];
     }
+    [self.tableView reloadData];
+    [SVProgressHUD dismiss];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -47,17 +59,34 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return self.storePostArray.count;
+    return self.myObjectIdArray.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSInteger row = indexPath.row;
     PostTableViewCell *postCell = [tableView dequeueReusableCellWithIdentifier:@"postCell" forIndexPath:indexPath];
+
     [postCell setDataOfParse:self.storePostArray[row]];
+    
     return postCell;
 }
 
+
+-(void)tableView:(UITableView *)tv didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [SVProgressHUD show];
+    NSInteger selectedRow = indexPath.row;
+    
+    CommentTableViewController *commentView = [self.storyboard instantiateViewControllerWithIdentifier:@"commentView"];
+    // 選択されたPOSTのオブジェクトIDを渡す
+    commentView.selectedObjectId = self.myObjectIdArray[selectedRow];
+    
+    [self.navigationController pushViewController:commentView animated:YES];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 140;
+}
 
 /*
 // Override to support conditional editing of the table view.
@@ -103,4 +132,7 @@
 }
 */
 
+- (IBAction)cancel:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 @end

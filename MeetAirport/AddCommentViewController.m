@@ -50,7 +50,6 @@
     // ユーザデフォルトの国籍を呼び出して、文字列として出力
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     self.outputNationality.text = [defaults stringForKey:@"userNationality"];
-    
 }
 
 
@@ -88,6 +87,8 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
  */
 
 - (IBAction)insertPost:(id)sender {
+    [SVProgressHUD show];
+    
     PFObject *insertObject = [PFObject objectWithClassName:@"Comment"];
     insertObject[@"postObjectId"] = self.selectedObjectId;
     insertObject[@"userName"] = self.inputName.text;
@@ -98,7 +99,29 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
     
     [insertObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error) {
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            
+            // 今SaveしたデータのPostのIDをとってくる
+            PFQuery *queryPost = [PFQuery queryWithClassName:@"Comment"];
+            [queryPost orderByDescending:@"createdAt"];
+            PFObject *firstObject = queryPost.getFirstObject;
+            NSString *selectedObjectId = [firstObject objectForKey:@"postObjectId"];
+            NSLog(@"%@",selectedObjectId);
+            
+            // とってきたIDをユーザデフォルトに保存
+            NSMutableArray *myObjectIdArray = [[NSMutableArray alloc]init];
+            // 既にユーザデフォルトのデータがある場合、Arrayにセットする
+            if([defaults arrayForKey:@"myObjectIdArray"] != nil) {
+                myObjectIdArray = [[defaults arrayForKey:@"myObjectIdArray"] mutableCopy];
+            }
+            // 新しいデータを追加
+            [myObjectIdArray addObject:selectedObjectId];
+            [defaults setObject:myObjectIdArray forKey:@"myObjectIdArray"];
+            
+            [defaults synchronize];
+            
             [SVProgressHUD showSuccessWithStatus:@"Save Success!"];
+            
             CommentTableViewController *commentTableViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"commentView"];
             [commentTableViewController reload];
         }
@@ -107,9 +130,48 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
             [SVProgressHUD showErrorWithStatus:@"Save Faild.."];
         }
     }];
+    
+    
+    /**
+     * 履歴表示のため、PostDataをユーザデフォルトに保存する（これ悪手やな・・）
+     */
+    
+    PFQuery *queryPost = [PFQuery queryWithClassName:@"Post"];
+    // postSelectedIdと一致するデータをfindする
+    [queryPost whereKey:@"objectId" equalTo: self.selectedObjectId];
+    NSArray *postObject = queryPost.findObjects;
+    NSDictionary *storePost = postObject.firstObject;
+    
+    // ユーザデフォルトに保存できるように整形
+    NSMutableDictionary *storePostDic = [[NSMutableDictionary alloc]init];
+    [storePostDic setObject:storePost[@"userName"] forKey:@"userName"];
+    [storePostDic setObject:storePost[@"nationality"] forKey:@"nationality"];
+    [storePostDic setObject:storePost[@"title"] forKey:@"title"];
+    [storePostDic setObject:storePost[@"contents"] forKey:@"contents"];
+    [storePostDic setObject:storePost[@"departureTime"] forKey:@"departureTime"];
+    NSData *imgData = [storePost[@"userImg"] getData];
+    [storePostDic setObject:imgData forKey:@"imageFile"];
+    [storePostDic setObject:storePost[@"airportId"] forKey:@"airportId"];
+    NSLog(@"%@", storePostDic);
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSMutableArray *addStorePost = [[NSMutableArray alloc] init];
+    // 既にユーザデフォルトのデータがある場合、Arrayにセットする
+    if([defaults arrayForKey:@"storePostArray"] != nil) {
+        addStorePost = [[defaults arrayForKey:@"storePostArray"] mutableCopy];
+    }
+    // 新しいデータを追加
+    [addStorePost addObject:storePostDic];
+    [defaults setObject:addStorePost forKey:@"storePostArray"];
+    // ユーザー情報の更新
+    [defaults setObject:self.inputName.text forKey:@"userName"];
+    [defaults setObject:self.imgData forKey:@"userImg"];
+    // 保存
+    [defaults synchronize];
 
     // Comment一覧に遷移
     [self dismissViewControllerAnimated:YES completion:nil];
+    [SVProgressHUD dismiss];
 }
 
 

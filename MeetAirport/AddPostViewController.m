@@ -18,6 +18,7 @@
 @property NSData *imgData;
 @property NSMutableDictionary *storeObject;
 @property UIScrollView *myScrollView;
+@property NSMutableArray *addStorePost;
 
 @end
 
@@ -147,7 +148,24 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 
     [insertObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error) {
-            NSLog(@"Save成功");
+            // 今SaveしたデータのオブジェクトIDをとってくる
+            PFQuery *queryPost = [PFQuery queryWithClassName:@"Post"];
+            [queryPost orderByDescending:@"createdAt"];
+            PFObject *firstObject = queryPost.getFirstObject;
+            NSString *selectedObjectId = [firstObject objectId];
+            
+            // とってきたIDをユーザデフォルトに保存
+            NSMutableArray *myObjectIdArray = [[NSMutableArray alloc]init];
+            // 既にユーザデフォルトのデータがある場合、Arrayにセットする
+            if([defaults arrayForKey:@"myObjectIdArray"] != nil) {
+                 myObjectIdArray = [[defaults arrayForKey:@"myObjectIdArray"] mutableCopy];
+            }
+            // 新しいデータを追加
+            [myObjectIdArray addObject:selectedObjectId];
+            [defaults setObject:myObjectIdArray forKey:@"myObjectIdArray"];
+            
+            [defaults synchronize];
+            
             [SVProgressHUD showSuccessWithStatus:@"Save Success!"];
         }
         else{
@@ -155,6 +173,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
             [SVProgressHUD showErrorWithStatus:@"Save Faild.."];
         }
     }];
+    
     
     /**
      * ユーザデフォルトに、選択されたデータ履歴を格納
@@ -170,49 +189,23 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
     [self.storeObject setObject:self.imgData forKey:@"imageFile"];
     [self.storeObject setObject:airportId forKey:@"airportId"];
     
+    
     /**
-     * userDefaultに保存するため、Arrayに追加・NSDataに変換して格納する
+     * userDefaultに保存するため、Arrayに追加して格納する
      */
     
-    // NSDataを使わない
-//    if(![defaults dataForKey:@"storePostArray"]) {
-//        NSMutableArray *addStorePost = [[NSMutableArray alloc] init];
-//        [addStorePost addObject:self.storeObject];
-//        NSLog(@"あっどすとあぽすと%@",addStorePost);
-//        [defaults setObject:addStorePost forKey:@"storePostArray"];
-//    } else {
-//        [[defaults arrayForKey:key] mutableCopy]
-//    }
-    
-    
-    
-    
-    // userDefault元々入っていたデータを一度呼び出す
-    if(![defaults dataForKey:@"storePost"]) {
-        NSLog(@"でーたがないよ");
-    } else {
-        NSLog(@"でーたがあるよ");
+    self.addStorePost = [[NSMutableArray alloc] init];
+    // 既にユーザデフォルトのデータがある場合、Arrayにセットする
+    if([defaults arrayForKey:@"storePostArray"] != nil) {
+        self.addStorePost = [[defaults arrayForKey:@"storePostArray"] mutableCopy];
     }
-//    NSData *storePostData = [defaults dataForKey:@"storePost"];
-//NSLog(@"すとあぽすとでーた２%@",storePostData);
-//NSLog(@"かいとうご１%@",[NSKeyedUnarchiver unarchiveObjectWithData:storePostData]);
-//    NSMutableArray *addStorePost = [[NSMutableArray alloc] init];
-//    addStorePost = [NSKeyedUnarchiver unarchiveObjectWithData:storePostData];
-//    
-//NSLog(@"あっどすとあでーた１%@",addStorePost);
-//    // 呼び出したMutableArrayに新しいデータを追加する
-//    [addStorePost addObject:self.storeObject];
-//NSLog(@"すとあおぶじぇくと%@",self.storeObject);
-//NSLog(@"あっどすとあでーた２%@",addStorePost);
-//    // 新しいデータが入っているArrayを、もう一度NSDataに変換する
-//    NSData *classData = [NSKeyedArchiver archivedDataWithRootObject:addStorePost];
-//NSLog(@"くらすでーた%@",classData);
-//    // userDefaultにセット
-//    [defaults setObject:classData forKey:@"storePost"];
-//    
-//    // ユーザー情報の更新
-//    [defaults setObject:self.inputName.text forKey:@"userName"];
-//    [defaults setObject:self.imgData forKey:@"userImg"];
+    // 新しいデータを追加
+    [self.addStorePost addObject:self.storeObject];
+    [defaults setObject:self.addStorePost forKey:@"storePostArray"];
+ 
+    // ユーザー情報の更新
+    [defaults setObject:self.inputName.text forKey:@"userName"];
+    [defaults setObject:self.imgData forKey:@"userImg"];
     
     // 保存
     [defaults synchronize];

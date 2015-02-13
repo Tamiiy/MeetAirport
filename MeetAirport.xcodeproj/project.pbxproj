@@ -30,6 +30,7 @@
 		CE725D311A6CA4AB00BA2389 /* AddPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE725D301A6CA4AB00BA2389 /* AddPostViewController.m */; };
 		CE725D341A6CB17C00BA2389 /* SelectNationalityTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE725D331A6CB17C00BA2389 /* SelectNationalityTableViewController.m */; };
 		CE9083901A635DBE00E6FC33 /* PostTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE90838F1A635DBE00E6FC33 /* PostTableViewController.m */; };
+		CE9430751A8D8ECE00C70406 /* GuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9430741A8D8ECE00C70406 /* GuideViewController.m */; };
 		CECB0A101A78925B0071BD51 /* topImg01.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CECB0A0F1A78925B0071BD51 /* topImg01.jpg */; };
 		CEE0D4F01A5CD69D009FBBB5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D4EF1A5CD69D009FBBB5 /* main.m */; };
 		CEE0D4F31A5CD69D009FBBB5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D4F21A5CD69D009FBBB5 /* AppDelegate.m */; };
@@ -89,6 +90,8 @@
 		CE725D331A6CB17C00BA2389 /* SelectNationalityTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectNationalityTableViewController.m; sourceTree = "<group>"; };
 		CE90838E1A635DBE00E6FC33 /* PostTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostTableViewController.h; sourceTree = "<group>"; };
 		CE90838F1A635DBE00E6FC33 /* PostTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostTableViewController.m; sourceTree = "<group>"; };
+		CE9430731A8D8ECE00C70406 /* GuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuideViewController.h; sourceTree = "<group>"; };
+		CE9430741A8D8ECE00C70406 /* GuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuideViewController.m; sourceTree = "<group>"; };
 		CECB0A0F1A78925B0071BD51 /* topImg01.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = topImg01.jpg; sourceTree = "<group>"; };
 		CEE0D4EA1A5CD69D009FBBB5 /* MeetAirport.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeetAirport.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEE0D4EE1A5CD69D009FBBB5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -200,6 +203,8 @@
 				CE725D331A6CB17C00BA2389 /* SelectNationalityTableViewController.m */,
 				CE5AE0081A807B2000E1937D /* HistoryTableViewController.h */,
 				CE5AE0091A807B2000E1937D /* HistoryTableViewController.m */,
+				CE9430731A8D8ECE00C70406 /* GuideViewController.h */,
+				CE9430741A8D8ECE00C70406 /* GuideViewController.m */,
 				CEE0D4FD1A5CD69D009FBBB5 /* Images.xcassets */,
 				CEE0D4FF1A5CD69D009FBBB5 /* LaunchScreen.xib */,
 				CEE0D4ED1A5CD69D009FBBB5 /* Supporting Files */,
@@ -417,6 +422,7 @@
 				CEEB40721A768A54009B14AB /* CommentTableViewCell.m in Sources */,
 				CEE0D4F01A5CD69D009FBBB5 /* main.m in Sources */,
 				CE235C3A1A87CEE7002BA219 /* SVIndefiniteAnimatedView.m in Sources */,
+				CE9430751A8D8ECE00C70406 /* GuideViewController.m in Sources */,
 				CE725D341A6CB17C00BA2389 /* SelectNationalityTableViewController.m in Sources */,
 				CEE0D4F91A5CD69D009FBBB5 /* ViewController.m in Sources */,
 				CEE0D4F61A5CD69D009FBBB5 /* MeetAirport.xcdatamodeld in Sources */,

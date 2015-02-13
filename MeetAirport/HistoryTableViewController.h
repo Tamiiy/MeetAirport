@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface HistoryTableViewController : UITableViewController
+- (IBAction)cancel:(id)sender;
 
 @end

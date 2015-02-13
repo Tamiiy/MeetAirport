@@ -24,7 +24,6 @@
 
 - (void)viewDidLoad {    
     [super viewDidLoad];
-    [SVProgressHUD show];
     
     PFQuery *query = [PFQuery queryWithClassName:@"Post"];
     
@@ -37,9 +36,19 @@
     
     // AirportIdと一致するデータをfindする
     [query whereKey:@"airportId" equalTo: self.airportId];
-    self.dataOfParse = query.findObjects;
-    
-    [SVProgressHUD showSuccessWithStatus:@"Loading Success!"];
+    [query orderByDescending:@"createdAt"];
+
+    [SVProgressHUD show];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if(!error){
+            self.dataOfParse = objects;
+            [self.tableView reloadData];
+            [SVProgressHUD showSuccessWithStatus:@"Loading Success!"];
+        } else {
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+            [SVProgressHUD showErrorWithStatus:@"load faild.."];
+        }
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -68,7 +77,7 @@
     PostTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"postCell" forIndexPath:indexPath];
     NSInteger row = indexPath.row;
     
-    //PostTableViewCellのsetDataOfParseメソッドに、データを1セルずつ引数として渡して呼び出す
+    // PostTableViewCellのsetDataOfParseメソッドに、データを1セルずつ引数として渡して呼び出す
     [cell setDataOfParse:self.dataOfParse[row]];
     return cell;
 }

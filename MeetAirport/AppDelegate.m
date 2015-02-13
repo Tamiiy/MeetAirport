@@ -36,6 +36,9 @@ NSLog(@"%f", self.window.frame.size.width);
     // 一括でラベルのフォントをAppleSDGothicNeo-Thinのサイズ18.0fに統一する
     [[UILabel appearance] setFont:[UIFont fontWithName:@"AppleSDGothicNeo-Thin" size:18.0f]];
     
+    // tintColorを設定
+    self.window.tintColor = [UIColor colorWithRed:11/255.0 green:167/255.0 blue:190/255.0 alpha:1.0];
+    
     return YES;
 }
 

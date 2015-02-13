@@ -13,6 +13,7 @@
 @property (nonatomic) NSString *selectedCountry;
 
 - (IBAction)cancel:(id)sender;
+- (IBAction)reloadBtn:(id)sender;
 
 @property (strong, nonatomic) IBOutlet UITableView *searchBar;
 

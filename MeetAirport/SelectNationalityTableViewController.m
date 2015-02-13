@@ -180,4 +180,8 @@
 - (IBAction)cancel:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+- (IBAction)reloadBtn:(id)sender {
+    [self.tableView reloadData];
+}
 @end
